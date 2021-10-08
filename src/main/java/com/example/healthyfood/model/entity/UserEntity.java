@@ -1,15 +1,15 @@
 package com.example.healthyfood.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity {
 
+    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
     private String firstName;
     private String lastName;
@@ -70,4 +70,5 @@ public class UserEntity extends BaseEntity{
         this.roles = roles;
         return this;
     }
+
 }
