@@ -1,5 +1,5 @@
 package com.example.healthyfood.model.entity.enums;
 
-public enum DifficultyEnum {
+public enum RecipeDifficultyEnum {
     EASY, MEDIUM, HARD
 }

@@ -1,7 +1,5 @@
 package com.example.healthyfood.model.entity;
 
-import com.example.healthyfood.model.entity.enums.DifficultyEnum;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,13 +12,10 @@ public class DrinkEntity extends BaseEntity{
     private String imageUrl;
     @Column(nullable = false)
     private Integer prepTime;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private DifficultyEnum difficulty;
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
     @OneToOne
     private RecipeEntity recipe;
-    @ManyToOne
-    private UserEntity author;
 
     public String getName() {
         return name;
@@ -49,12 +44,12 @@ public class DrinkEntity extends BaseEntity{
         return this;
     }
 
-    public DifficultyEnum getDifficulty() {
-        return difficulty;
+    public String getDescription() {
+        return description;
     }
 
-    public DrinkEntity setDifficulty(DifficultyEnum difficulty) {
-        this.difficulty = difficulty;
+    public DrinkEntity setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -64,15 +59,6 @@ public class DrinkEntity extends BaseEntity{
 
     public DrinkEntity setRecipe(RecipeEntity recipe) {
         this.recipe = recipe;
-        return this;
-    }
-
-    public UserEntity getAuthor() {
-        return author;
-    }
-
-    public DrinkEntity setAuthor(UserEntity author) {
-        this.author = author;
         return this;
     }
 }

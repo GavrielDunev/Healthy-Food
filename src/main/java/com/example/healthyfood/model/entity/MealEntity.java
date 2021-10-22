@@ -1,12 +1,12 @@
 package com.example.healthyfood.model.entity;
 
-import com.example.healthyfood.model.entity.enums.DifficultyEnum;
+import com.example.healthyfood.model.entity.enums.MealCategoryEnum;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "foods")
-public class FoodEntity extends BaseEntity{
+@Table(name = "meals")
+public class MealEntity extends BaseEntity{
 
     @Column(nullable = false)
     private String name;
@@ -17,18 +17,18 @@ public class FoodEntity extends BaseEntity{
     @Column(nullable = false)
     private Integer cookTime;
     @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private DifficultyEnum difficulty;
+    private MealCategoryEnum category;
     @OneToOne
     private RecipeEntity recipe;
-    @ManyToOne
-    private UserEntity author;
 
     public String getName() {
         return name;
     }
 
-    public FoodEntity setName(String name) {
+    public MealEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -37,7 +37,7 @@ public class FoodEntity extends BaseEntity{
         return imageUrl;
     }
 
-    public FoodEntity setImageUrl(String imageUrl) {
+    public MealEntity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -46,7 +46,7 @@ public class FoodEntity extends BaseEntity{
         return prepTime;
     }
 
-    public FoodEntity setPrepTime(Integer prepTime) {
+    public MealEntity setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
         return this;
     }
@@ -55,17 +55,17 @@ public class FoodEntity extends BaseEntity{
         return cookTime;
     }
 
-    public FoodEntity setCookTime(Integer cookTime) {
+    public MealEntity setCookTime(Integer cookTime) {
         this.cookTime = cookTime;
         return this;
     }
 
-    public DifficultyEnum getDifficulty() {
-        return difficulty;
+    public String getDescription() {
+        return description;
     }
 
-    public FoodEntity setDifficulty(DifficultyEnum difficulty) {
-        this.difficulty = difficulty;
+    public MealEntity setDescription(String description) {
+        this.description = description;
         return this;
     }
 
@@ -73,17 +73,17 @@ public class FoodEntity extends BaseEntity{
         return recipe;
     }
 
-    public FoodEntity setRecipe(RecipeEntity recipe) {
+    public MealEntity setRecipe(RecipeEntity recipe) {
         this.recipe = recipe;
         return this;
     }
 
-    public UserEntity getAuthor() {
-        return author;
+    public MealCategoryEnum getCategory() {
+        return category;
     }
 
-    public FoodEntity setAuthor(UserEntity author) {
-        this.author = author;
+    public MealEntity setCategory(MealCategoryEnum category) {
+        this.category = category;
         return this;
     }
 }
