@@ -10,6 +10,16 @@ import java.time.LocalDateTime;
 public class RecipeEntity extends BaseEntity{
 
     @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String imageUrl;
+    @Column(nullable = false)
+    private Integer prepTime;
+    @Column(nullable = false)
+    private Integer cookTime;
+    @Column(nullable = false)
+    private String description;
+    @Column(nullable = false)
     private LocalDateTime created;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -20,6 +30,51 @@ public class RecipeEntity extends BaseEntity{
     private String ingredients;
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String instructions;
+
+    public String getName() {
+        return name;
+    }
+
+    public RecipeEntity setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public RecipeEntity setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Integer getPrepTime() {
+        return prepTime;
+    }
+
+    public RecipeEntity setPrepTime(Integer prepTime) {
+        this.prepTime = prepTime;
+        return this;
+    }
+
+    public Integer getCookTime() {
+        return cookTime;
+    }
+
+    public RecipeEntity setCookTime(Integer cookTime) {
+        this.cookTime = cookTime;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public RecipeEntity setDescription(String description) {
+        this.description = description;
+        return this;
+    }
 
     public LocalDateTime getCreated() {
         return created;
