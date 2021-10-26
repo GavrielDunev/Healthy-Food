@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class RecipeEntity extends BaseEntity{
 
     @Column(nullable = false)
-    private String name;
+    private String title;
     @Column(nullable = false)
     private String imageUrl;
     @Column(nullable = false)
@@ -31,12 +31,12 @@ public class RecipeEntity extends BaseEntity{
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String instructions;
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public RecipeEntity setName(String name) {
-        this.name = name;
+    public RecipeEntity setTitle(String name) {
+        this.title = name;
         return this;
     }
 
