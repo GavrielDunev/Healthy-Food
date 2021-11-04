@@ -1,99 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Healthy food</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-
-</head>
+<head th:replace="fragments/commons :: head"></head>
 
 <body>
-    <div class="container">
-        <form th:method="post" th:action="@{/users/register}" class="content col-md-5 mt-5 mx-auto">
-            <div class="card input-card p-3 d-flex flex-column">
-                <img src="/images/register.png" height="50" width="50" />
-                <h2 class="login mt-3">Register</h2>
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="username">Username</label>
-                    <input id="username" name="username" type="text" min="2" max="50" class="form-control"
-                        placeholder="Enter username">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        Username length must be between 5 and 20 characters.</small>
-                </div>
+<div class="container">
+    <form th:method="post" th:action="@{/users/register}" class="content col-md-5 mt-5 mx-auto">
+        <div class="card input-card p-3 d-flex flex-column">
+            <img src="/images/register.png" height="50" width="50"/>
+            <h2 class="login mt-3">Register</h2>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" min="2" max="50" class="form-control"
+                       placeholder="Enter username">
+                <small class="invalid-feedback errors alert alert-danger">
+                    Username length must be between 5 and 20 characters.</small>
+            </div>
 
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="firstName">First name</label>
-                    <input id="firstName" name="firstName" type="text" min="2" max="50" class="form-control"
-                        placeholder="Enter first name">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        First name length must be between 5 and 20 characters.</small>
-                </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="firstName">First name</label>
+                <input id="firstName" name="firstName" type="text" min="2" max="50" class="form-control"
+                       placeholder="Enter first name">
+                <small class="invalid-feedback errors alert alert-danger">
+                    First name length must be between 5 and 20 characters.</small>
+            </div>
 
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="lastName">Last name</label>
-                    <input id="lastName" name="lastName" type="text" min="2" max="50" class="form-control"
-                        placeholder="Enter last name">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        Last name length must be between 5 and 20 characters.</small>
-                </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="lastName">Last name</label>
+                <input id="lastName" name="lastName" type="text" min="2" max="50" class="form-control"
+                       placeholder="Enter last name">
+                <small class="invalid-feedback errors alert alert-danger">
+                    Last name length must be between 5 and 20 characters.</small>
+            </div>
 
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="text" min="2" max="50" class="form-control"
-                        placeholder="Enter email address">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        Enter valid email address.</small>
-                </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" min="2" max="50" class="form-control"
+                       placeholder="Enter email address">
+                <small class="invalid-feedback errors alert alert-danger">
+                    Enter valid email address.</small>
+            </div>
 
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="password">Password</label>
-                    <input id="password" name="password" type="password" min="2" max="20" class="form-control"
-                        placeholder="Enter password">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        Password length must be more than 5 characters long.</small>
-                </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" min="2" max="20" class="form-control"
+                       placeholder="Enter password">
+                <small class="invalid-feedback errors alert alert-danger">
+                    Password length must be more than 5 characters long.</small>
+            </div>
 
-                <div class="form-group input-field d-flex flex-column mt-3">
-                    <label for="confirmPassword">Confirm password</label>
-                    <input id="confirmPassword" name="confirmPassword" type="password" min="2" max="20"
-                        class="form-control" placeholder="Enter confirm password">
-                    <small class="invalid-feedback errors alert alert-danger">
-                        Confirm password length must be more than 5 characters long.</small>
-                </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="confirmPassword">Confirm password</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" min="2" max="20"
+                       class="form-control" placeholder="Enter confirm password">
+                <small class="invalid-feedback errors alert alert-danger">
+                    Confirm password length must be more than 5 characters long.</small>
+            </div>
 
-                <div class="row justify-content-center">
-                    <div class="col col-md-4">
-                        <div class="button-holder d-flex">
-                            <button type="submit"
-                                class="form-button mt-4 btn btn-dark d-flex justify-content-center align-items-center">Register</button>
-                        </div>
+            <div class="row justify-content-center">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <button type="submit"
+                                class="form-button mt-4 btn btn-dark d-flex justify-content-center align-items-center">
+                            Register
+                        </button>
                     </div>
                 </div>
-
-                <div class="text2 mt-2 d-flex flex-row align-items-center">
-                    <span>Already have an account?</span>
-                    <a class="register" href="/users/login">Login here</a>
-                </div>
-
             </div>
-        </form>
-    </div>
 
-    <footer>
-        <h7>
-            &copy; Healthy Food 2021. All rights reserved.
-        </h7>
-    </footer>
+            <div class="text2 mt-2 d-flex flex-row align-items-center">
+                <span>Already have an account?</span>
+                <a class="register" href="/users/login">Login here</a>
+            </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/commons :: footer"></footer>
 
 </body>
 
