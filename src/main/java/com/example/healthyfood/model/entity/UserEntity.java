@@ -11,11 +11,15 @@ public class UserEntity extends BaseEntity {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
+    private String email;
     @OneToOne
     private PictureEntity profilePicture;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> roles;
 
     public String getUsername() {
@@ -72,4 +76,12 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 }

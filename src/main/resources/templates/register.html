@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
 <body>
 <div class="container">
-    <form th:method="post" th:action="@{/users/register}" class="content col-md-5 mt-5 mx-auto">
+    <form th:method="post" th:action="@{/users/register}" th:object="${userRegisterBindingModel}" class="content col-md-5 mt-5 mx-auto">
         <div class="card input-card p-3 d-flex flex-column">
             <img src="/images/register.png" height="50" width="50"/>
             <h2 class="login mt-3">Register</h2>
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="username">Username</label>
-                <input id="username" name="username" type="text" min="2" max="50" class="form-control"
+                <input id="username" name="username"
+                       th:field="*{username}"
+                       th:errorclass="is-invalid"
+                       type="text" required minlength="4" maxlength="20" class="form-control"
                        placeholder="Enter username">
-                <small class="invalid-feedback errors alert alert-danger">
-                    Username length must be between 5 and 20 characters.</small>
+                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="invalid-feedback errors alert alert-danger">
+                    Username length must be between 4 and 20 characters.</small>
             </div>
 
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="firstName">First name</label>
-                <input id="firstName" name="firstName" type="text" min="2" max="50" class="form-control"
+                <input id="firstName" name="firstName"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"
+                       type="text" required minlength="2" maxlength="20" class="form-control"
                        placeholder="Enter first name">
                 <small class="invalid-feedback errors alert alert-danger">
-                    First name length must be between 5 and 20 characters.</small>
+                    First name length must be between 3 and 20 characters.</small>
             </div>
 
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="lastName">Last name</label>
-                <input id="lastName" name="lastName" type="text" min="2" max="50" class="form-control"
+                <input id="lastName" name="lastName"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid"
+                       type="text" required minlength="3" maxlength="20" class="form-control"
                        placeholder="Enter last name">
                 <small class="invalid-feedback errors alert alert-danger">
-                    Last name length must be between 5 and 20 characters.</small>
+                    Last name length must be between 3 and 20 characters.</small>
             </div>
 
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="email">Email</label>
-                <input id="email" name="email" type="text" min="2" max="50" class="form-control"
+                <input id="email" name="email"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid"
+                       type="text" required class="form-control"
                        placeholder="Enter email address">
                 <small class="invalid-feedback errors alert alert-danger">
                     Enter valid email address.</small>
@@ -45,18 +56,24 @@
 
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="password">Password</label>
-                <input id="password" name="password" type="password" min="2" max="20" class="form-control"
+                <input id="password" name="password"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"
+                       type="password" required minlength="8" maxlength="30" class="form-control"
                        placeholder="Enter password">
                 <small class="invalid-feedback errors alert alert-danger">
-                    Password length must be more than 5 characters long.</small>
+                    Password length must be at least 8 characters long.</small>
             </div>
 
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="confirmPassword">Confirm password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" min="2" max="20"
+                <input id="confirmPassword" name="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"
+                       type="password" required minlength="8" maxlength="30"
                        class="form-control" placeholder="Enter confirm password">
                 <small class="invalid-feedback errors alert alert-danger">
-                    Confirm password length must be more than 5 characters long.</small>
+                    Confirm password length must be at least 8 characters long.</small>
             </div>
 
             <div class="row justify-content-center">
@@ -72,7 +89,7 @@
 
             <div class="text2 mt-2 d-flex flex-row align-items-center">
                 <span>Already have an account?</span>
-                <a class="register" href="/users/login">Login here</a>
+                <a class="register" th:href="@{/users/login}">Login here</a>
             </div>
 
         </div>
