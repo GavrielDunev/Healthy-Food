@@ -11,8 +11,8 @@ public class RecipeEntity extends BaseEntity{
 
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
-    private String imageUrl;
+    @OneToOne
+    private PictureEntity picture;
     @Column(nullable = false)
     private Integer prepTime;
     @Column(nullable = false)
@@ -40,12 +40,12 @@ public class RecipeEntity extends BaseEntity{
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public RecipeEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public RecipeEntity setPicture(PictureEntity picture) {
+        this.picture = picture;
         return this;
     }
 

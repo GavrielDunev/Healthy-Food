@@ -13,7 +13,8 @@ public class UserEntity extends BaseEntity {
     private String password;
     private String firstName;
     private String lastName;
-    private Boolean isActive;
+    @OneToOne
+    private PictureEntity profilePicture;
     @ManyToMany
     private Set<UserRoleEntity> roles;
 
@@ -53,12 +54,12 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public Boolean getActive() {
-        return isActive;
+    public PictureEntity getProfilePicture() {
+        return profilePicture;
     }
 
-    public UserEntity setActive(Boolean active) {
-        isActive = active;
+    public UserEntity setProfilePicture(PictureEntity profilePicture) {
+        this.profilePicture = profilePicture;
         return this;
     }
 
