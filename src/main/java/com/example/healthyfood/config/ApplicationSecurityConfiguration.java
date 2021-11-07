@@ -24,7 +24,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/users/login", "/users/register").permitAll()
+                .antMatchers("/", "/about", "/meals/breakfast", "/meals/lunch",
+                        "/meals/dinner", "/drinks").permitAll()
+                .antMatchers("/users/login", "/users/register").not().authenticated()
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
