@@ -13,7 +13,9 @@
             <h2 class="login mt-3">Login</h2>
             <div class="form-group input-field d-flex flex-column mt-3">
                 <label for="username">Username</label>
-                <input id="username" name="username" type="text" required minlength="4" maxlength="20" class="form-control"
+                <input id="username" name="username"
+                       th:value="${username}"
+                       type="text" required minlength="4" maxlength="20" class="form-control"
                        placeholder="Enter username">
             </div>
 
