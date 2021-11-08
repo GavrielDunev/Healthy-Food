@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
 
-        List<RecipeSummaryViewModel> recipes = this.recipeService.getAllRecipeViews();
+        List<RecipeSummaryViewModel> recipes = this.recipeService.getLastSixRecipes();
 
         model.addAttribute("recipes", recipes);
 

@@ -21,7 +21,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<RecipeSummaryViewModel> getAllRecipeViews() {
+    public List<RecipeSummaryViewModel> getLastSixRecipes() {
 
         return this.recipeRepository.findLastSixRecipesOrderByCreatedDesc()
                 .stream()
