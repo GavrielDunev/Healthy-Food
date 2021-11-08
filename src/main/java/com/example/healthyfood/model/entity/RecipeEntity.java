@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "recipes")
-public class RecipeEntity extends BaseEntity{
+public class RecipeEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String title;
@@ -120,4 +120,5 @@ public class RecipeEntity extends BaseEntity{
         this.instructions = instructions;
         return this;
     }
+
 }

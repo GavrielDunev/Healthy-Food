@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "pictures")
-public class PictureEntity extends BaseEntity{
+public class PictureEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String url;
@@ -30,4 +30,5 @@ public class PictureEntity extends BaseEntity{
         this.publicId = publicId;
         return this;
     }
+
 }

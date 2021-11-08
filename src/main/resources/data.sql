@@ -9,8 +9,8 @@ INSERT INTO pictures(id, url, public_id)
 VALUES (1, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636195985/profile-pic_u3hhvx.png',
         'profile-pic_u3hhvx');
 
-INSERT INTO users (id, username, password, profile_picture_id)
-VALUES (1, 'user', 'user', 1);
+INSERT INTO users (id, username, password, profile_picture_id, email, first_name, last_name)
+VALUES (1, 'user', 'user', 1, 'user@gmail.com', 'User', 'User');
 
 -- users roles
 INSERT INTO users_roles (user_entity_id, roles_id)
@@ -23,7 +23,7 @@ VALUES (2, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636201147/health
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (1, 5, '2011-11-05 13:09',
-        'Start your day right with this filling bowl of oats, berries, banana and seeds. It''s healthy and packed with nutrients to fuel body and mind',
+        'Start your day right with this filling bowl of oats, berries, banana and seeds. It''s healthy and packed with nutrients to fuel body and mind.',
         'EASY',
         2,
         '100g frozen raspberries
@@ -50,12 +50,7 @@ VALUES (3, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636207680/breakf
         'breakfast-burrito-b086548_noszay');
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
-VALUES (2, 10, '2021-11-06 16:10', 'Make a nutritious cocoon for breakfast ingredients with a wholemeal wrap. We’ve included protein-rich eggs and avocado to add good fats to this burrito
-
-Share on facebook
-Share on twitter
-Share on pinterest
-Email to a friend',
+VALUES (2, 10, '2021-11-06 16:10', 'Make a nutritious cocoon for breakfast ingredients with a wholemeal wrap. We’ve included protein-rich eggs and avocado to add good fats to this burrito.',
         'EASY', 3, '1 tsp chipotle paste
 1 egg
 1 tsp rapeseed oil
@@ -78,7 +73,7 @@ VALUES (4, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636209163/eggroc
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (3, 6, '2021-11-06 16:34',
-        'The steak in this light salad is cooked on the barbecue, giving it a true taste of summer. It works brilliantly with our Asian-inspired dressing',
+        'The steak in this light salad is cooked on the barbecue, giving it a true taste of summer. It works brilliantly with our Asian-inspired dressing.',
         'EASY', 4, '2 x 250g sirloin sirloin steaks , fat trimmed
 thumb-sized piece ginger , finely grated
 1 garlic clove , finely grated
@@ -113,7 +108,7 @@ VALUES (5,
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (4, 30, '2021-11-06 16:47',
-        'A vibrant salad packed with yellow and red peppers, colourful onion, beef cooked to your liking and healthy grains',
+        'A vibrant salad packed with yellow and red peppers, colourful onion, beef cooked to your liking and healthy grains.',
         'EASY', 5, '85g pearl barley , rinsed
 1 red pepper , deseeded and cut into strips
 1 yellow pepper , deseeded and cut into strips
@@ -141,7 +136,7 @@ VALUES (6, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636210351/roaste
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (5, 50, '2021-11-06 16:53',
-        'This extra special vegan curry uses roasted cauliflower and potatoes to bring out their flavour. You can also serve as a side to meat curries',
+        'This extra special vegan curry uses roasted cauliflower and potatoes to bring out their flavour. You can also serve as a side to meat curries.',
         'EASY', 6,
         '400g floury potatoes (such as Maris Piper or King Edward), cut into medium-sized chunks
 1 large cauliflower, cut into florets
@@ -182,7 +177,7 @@ VALUES (7, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636210588/chicke
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (6, 30, '2021-11-06 16:57',
-        'Serve up these healthy chicken and sweetcorn tacos for an easy midweek meal that''s full of flavour. You''ll also have leftovers to make chicken and sweetcorn wraps for lunch tomorrow',
+        'Serve up these healthy chicken and sweetcorn tacos for an easy midweek meal that''s full of flavour. You''ll also have leftovers to make chicken and sweetcorn wraps for lunch tomorrow.',
         'MEDIUM', 7,
         '250g plain flour , plus extra for dusting
 2 tbsp rapeseed oil
@@ -266,7 +261,7 @@ VALUES (10, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636225152/recip
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (9, 0, '2021-11-06 20:53',
-        'Three ingredients and two minutes is all you need to whip up this low-fat, low-calorie yogurt, which is ideal for eating after exercise',
+        'Three ingredients and two minutes is all you need to whip up this low-fat, low-calorie yogurt, which is ideal for eating after exercise.',
         'EASY', 10,
         '250g frozen mixed berry
 250g 0%-fat Greek yogurt
