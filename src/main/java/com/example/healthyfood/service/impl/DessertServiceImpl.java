@@ -23,7 +23,7 @@ public class DessertServiceImpl implements DessertService {
     @Override
     public List<RecipeAllSummaryViewModel> getAllDessertViews() {
 
-        return this.dessertRepository.findAllOrderByCreated()
+        return this.dessertRepository.findAllOrderByCreatedDesc()
                 .stream()
                 .map(dessertEntity -> this.modelMapper.map(dessertEntity, RecipeAllSummaryViewModel.class))
                 .collect(Collectors.toList());

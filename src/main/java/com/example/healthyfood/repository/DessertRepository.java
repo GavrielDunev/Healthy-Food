@@ -11,5 +11,5 @@ import java.util.List;
 public interface DessertRepository extends JpaRepository<DessertEntity, Long> {
 
     @Query("SELECT d FROM DessertEntity d ORDER BY d.recipe.created DESC")
-    List<DessertEntity> findAllOrderByCreated();
+    List<DessertEntity> findAllOrderByCreatedDesc();
 }
