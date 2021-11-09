@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class DessertEntity extends BaseEntity{
 
     @OneToOne
-    RecipeEntity recipe;
+    private RecipeEntity recipe;
 
     public RecipeEntity getRecipe() {
         return recipe;

@@ -1,6 +1,6 @@
 package com.example.healthyfood.service.impl;
 
-import com.example.healthyfood.model.view.RecipeSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 import com.example.healthyfood.repository.RecipeRepository;
 import com.example.healthyfood.service.RecipeService;
 import org.modelmapper.ModelMapper;
@@ -21,11 +21,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<RecipeSummaryViewModel> getLastSixRecipes() {
+    public List<RecipeHomeSummaryViewModel> getLastSixRecipeViews() {
 
         return this.recipeRepository.findLastSixRecipesOrderByCreatedDesc()
                 .stream()
-                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeSummaryViewModel.class))
+                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeHomeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 }

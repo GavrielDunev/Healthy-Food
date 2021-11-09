@@ -10,7 +10,7 @@ VALUES (1, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636195985/profil
         'profile-pic_u3hhvx');
 
 INSERT INTO users (id, username, password, profile_picture_id, email, first_name, last_name)
-VALUES (1, 'user', 'user', 1, 'user@gmail.com', 'User', 'User');
+VALUES (1, 'user', '12345678', 1, 'user@gmail.com', 'User', 'User');
 
 -- users roles
 INSERT INTO users_roles (user_entity_id, roles_id)

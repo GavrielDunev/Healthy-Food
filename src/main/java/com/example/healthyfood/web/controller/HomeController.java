@@ -1,6 +1,6 @@
 package com.example.healthyfood.web.controller;
 
-import com.example.healthyfood.model.view.RecipeSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 import com.example.healthyfood.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
 
-        List<RecipeSummaryViewModel> recipes = this.recipeService.getLastSixRecipes();
+        List<RecipeHomeSummaryViewModel> recipes = this.recipeService.getLastSixRecipeViews();
 
         model.addAttribute("recipes", recipes);
 

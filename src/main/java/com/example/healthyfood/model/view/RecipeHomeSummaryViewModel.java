@@ -2,7 +2,7 @@ package com.example.healthyfood.model.view;
 
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 
-public class RecipeSummaryViewModel {
+public class RecipeHomeSummaryViewModel {
 
     private Long id;
     private String title;
@@ -14,7 +14,7 @@ public class RecipeSummaryViewModel {
         return title;
     }
 
-    public RecipeSummaryViewModel setTitle(String title) {
+    public RecipeHomeSummaryViewModel setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -23,7 +23,7 @@ public class RecipeSummaryViewModel {
         return pictureUrl;
     }
 
-    public RecipeSummaryViewModel setPictureUrl(String pictureUrl) {
+    public RecipeHomeSummaryViewModel setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
         return this;
     }
@@ -32,7 +32,7 @@ public class RecipeSummaryViewModel {
         return description;
     }
 
-    public RecipeSummaryViewModel setDescription(String description) {
+    public RecipeHomeSummaryViewModel setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -41,7 +41,7 @@ public class RecipeSummaryViewModel {
         return id;
     }
 
-    public RecipeSummaryViewModel setId(Long id) {
+    public RecipeHomeSummaryViewModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -50,7 +50,7 @@ public class RecipeSummaryViewModel {
         return difficulty;
     }
 
-    public RecipeSummaryViewModel setDifficulty(RecipeDifficultyEnum difficulty) {
+    public RecipeHomeSummaryViewModel setDifficulty(RecipeDifficultyEnum difficulty) {
         this.difficulty = difficulty;
         return this;
     }

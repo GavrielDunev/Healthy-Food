@@ -25,7 +25,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/", "/about", "/meals/breakfast", "/meals/lunch",
-                        "/meals/dinner", "/drinks").permitAll()
+                        "/meals/dinner", "/drinks", "/desserts").permitAll()
                 .antMatchers("/users/login", "/users/register").not().authenticated()
                 .antMatchers("/**").authenticated()
                 .and()

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -10,29 +9,29 @@
 
 <main>
     <section class="py-5 text-center container">
-        <h1 class="fw-light fst-italic text-black">Drink recipes</h1>
+        <h1 class="fw-light fst-italic text-black" th:text="${type} + ' recipes'">Recipes</h1>
     </section>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                <div class="col">
+                <div class="col" th:each="r : ${recipes}" th:object="${r}">
                     <div class="card shadow-sm">
                         <img class="bd-placeholder-img card-img-top-wrapper"
-                             src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"
+                             th:src="*{recipePictureUrl}"
                              alt="Food image">
                         <div class="card-body pb-1">
-                            <h5 class="card-title" th:text="">
+                            <h5 class="card-title" th:text="*{recipeTitle}">
                                 Recipe name</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Recipe description</p>
+                            <p class="card-text" th:text="*{recipeDescription}">Recipe description</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type="button" class="btn btn-outline-secondary" href="#" role="button">Read
+                                    <a type="button" class="btn btn-outline-secondary" th:href="@{/recipes/details/{id}(id = *{recipeId})}" role="button">Read
                                         more</a>
                                 </div>
-                                <small class="text-muted">9 mins</small>
+                                <small class="text-muted" th:text="*{recipeDifficulty.name()}">Difficulty</small>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,9 @@
 package com.example.healthyfood.service;
 
-import com.example.healthyfood.model.view.RecipeSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 
 import java.util.List;
 
 public interface RecipeService {
-    List<RecipeSummaryViewModel> getLastSixRecipes();
+    List<RecipeHomeSummaryViewModel> getLastSixRecipeViews();
 }
