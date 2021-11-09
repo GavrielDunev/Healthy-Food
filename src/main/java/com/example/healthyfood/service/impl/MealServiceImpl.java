@@ -23,7 +23,25 @@ public class MealServiceImpl implements MealService {
     @Override
     public List<RecipeAllSummaryViewModel> getAllBreakfastViews() {
 
-        return this.mealRepository.findAllOrderByCreatedDesc()
+        return this.mealRepository.findAllBreakfastOrderByCreatedDesc()
+                .stream()
+                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecipeAllSummaryViewModel> getAllLunchViews() {
+
+        return this.mealRepository.findAllLunchOrderByCreatedDesc()
+                .stream()
+                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecipeAllSummaryViewModel> getAllDinnerViews() {
+
+        return this.mealRepository.findAllDinnerOrderByCreatedDesc()
                 .stream()
                 .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
                 .collect(Collectors.toList());

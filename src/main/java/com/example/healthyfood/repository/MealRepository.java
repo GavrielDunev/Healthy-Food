@@ -12,5 +12,11 @@ import java.util.List;
 public interface MealRepository extends JpaRepository<MealEntity, Long> {
 
     @Query("SELECT m FROM MealEntity m WHERE m.category = 'BREAKFAST' ORDER BY m.recipe.created DESC")
-    List<MealEntity> findAllOrderByCreatedDesc();
+    List<MealEntity> findAllBreakfastOrderByCreatedDesc();
+
+    @Query("SELECT m FROM MealEntity m WHERE m.category = 'LUNCH' ORDER BY m.recipe.created DESC")
+    List<MealEntity> findAllLunchOrderByCreatedDesc();
+
+    @Query("SELECT m FROM MealEntity m WHERE m.category = 'DINNER' ORDER BY m.recipe.created DESC")
+    List<MealEntity> findAllDinnerOrderByCreatedDesc();
 }

@@ -30,5 +30,25 @@ public class MealController {
         return "all-recipes";
     }
 
+    @GetMapping("/lunch")
+    public String lunch(Model model) {
 
+        List<RecipeAllSummaryViewModel> lunchRecipes = this.mealService.getAllLunchViews();
+
+        model.addAttribute("type", "Lunch");
+        model.addAttribute("recipes", lunchRecipes);
+
+        return "all-recipes";
+    }
+
+    @GetMapping("dinner")
+    public String dinner(Model model) {
+
+        List<RecipeAllSummaryViewModel> dinnerRecipes = this.mealService.getAllDinnerViews();
+
+        model.addAttribute("type", "Dinner");
+        model.addAttribute("recipes", dinnerRecipes);
+
+        return "all-recipes";
+    }
 }
