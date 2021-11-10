@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "drinks")
 public class DrinkEntity extends BaseEntity{
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private RecipeEntity recipe;
 
     public RecipeEntity getRecipe() {

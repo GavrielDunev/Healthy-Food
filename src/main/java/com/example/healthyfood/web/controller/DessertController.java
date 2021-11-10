@@ -67,7 +67,7 @@ public class DessertController {
 
         this.dessertService.saveDessert(recipeAddServiceModel, principal.getName());
 
-        return "redirect:/desserts/";
+        return "redirect:/desserts";
     }
 
     @ModelAttribute

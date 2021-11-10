@@ -11,7 +11,7 @@ public class MealEntity extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private MealCategoryEnum category;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private RecipeEntity recipe;
 
     public RecipeEntity getRecipe() {
