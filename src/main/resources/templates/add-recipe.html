@@ -58,7 +58,22 @@
                     Picture is required.
                 </small>
             </div>
-
+            <th:block th:if="${type == 'meal'}">
+                <div class="col-md-4">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" class="form-select">
+                        <option value="" selected>Choose category</option>
+                        <option th:each="c : ${T(com.example.healthyfood.model.entity.enums.MealCategoryEnum).values()}"
+                                th:value="${c}"
+                                th:text="${c}"
+                                th:selected="${c} == *{category}">BREAKFAST
+                        </option>
+                    </select>
+                    <small class="invalid-feedback bg-danger text-light rounded">
+                        Category is required.
+                    </small>
+                </div>
+            </th:block>
             <div class="col-md-4">
                 <label for="difficulty" class="form-label">Difficulty</label>
                 <select th:field="*{difficulty}" id="difficulty" class="form-select">
