@@ -1,5 +1,6 @@
 package com.example.healthyfood.model.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "desserts")
 public class DessertEntity extends BaseEntity{
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private RecipeEntity recipe;
 
     public RecipeEntity getRecipe() {

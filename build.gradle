@@ -21,6 +21,8 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:2.4.4'
     implementation 'org.springframework.security:spring-security-crypto:5.5.2'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'com.cloudinary:cloudinary:1.0.14'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

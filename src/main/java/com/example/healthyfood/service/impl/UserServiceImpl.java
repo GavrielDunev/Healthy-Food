@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(UserRegisterServiceModel userRegisterServiceModel) {
+    public void registerAndLoginUser(UserRegisterServiceModel userRegisterServiceModel) {
 
         UserRoleEntity userRole = this.userRoleRepository.findByRole(UserRoleEnum.USER);
         PictureEntity defaultProfilePicture = this.pictureRepository.getById(1L);
@@ -64,5 +64,11 @@ public class UserServiceImpl implements UserService {
                 principal.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+
+        return this.userRepository.findByUsername(username).orElse(null);
     }
 }

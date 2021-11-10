@@ -5,7 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public interface PictureService {
+public interface CloudinaryService {
 
-    PictureEntity createPicture(MultipartFile picture) throws IOException;
+    PictureEntity upload(MultipartFile multipartFile) throws IOException;
+
+    boolean delete(String publicId);
 }

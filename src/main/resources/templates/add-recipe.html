@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -11,58 +10,104 @@
 <main>
 
     <section class="py-5 text-center container">
-        <h1 class="fw-light fst-italic text-black">Add recipe</h1>
+        <h1 class="fw-light fst-italic text-black" th:text="'Add '+ ${type} + ' recipe' ">Add recipe</h1>
     </section>
 
     <div class="container recipe-form">
-        <form class="row gy-3">
+        <form class="row gy-3"
+              th:action="@{/{type}/add(type = ${type} + 's')}"
+              th:method="post"
+              th:object="${recipeAddBindingModel}"
+              enctype="multipart/form-data">
             <div class="col-md-7 col-lg-6">
                 <label for="title" class="form-label">Title</label>
-                <input th:field="*{title}" th:errorclass="is-invalid" type="text" class="form-control" id="title">
-                <small class="invalid-feedback bg-danger text-light rounded">
+                <input th:field="*{title}"
+                       th:errorclass="is-invalid"
+                       placeholder="Enter title" type="text" class="form-control" id="title">
+                <small class="invalid-feedback errors alert alert-danger">
                     Title must be between 2 and 20 characters.
                 </small>
             </div>
             <div class="col-md-4 col-lg-3">
                 <label for="prepTime" class="form-label">Prep time (min)</label>
-                <input type="number" class="form-control" id="prepTime">
+                <input type="number"
+                       th:field="*{prepTime}"
+                       th:errorclass="is-invalid"
+                       class="form-control" id="prepTime">
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Prep time is required.
+                </small>
             </div>
             <div class="col-md-4 col-lg-3">
                 <label for="cookTime" class="form-label">Cook time (min)</label>
-                <input type="number" class="form-control" id="cookTime">
+                <input type="number"
+                       th:field="*{cookTime}"
+                       th:errorclass="is-invalid"
+                       class="form-control" min="0" id="cookTime">
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Cook time is required.
+                </small>
             </div>
             <div class="col-md-10 col-lg-10">
-                <label for="imageUrl" class="form-label">Image URL</label>
-                <input type="file" class="form-control" id="imageUrl">
+                <label for="picture" class="form-label">Picture</label>
+                <input type="file"
+                       th:field="*{picture}"
+                       th:erroclass="is-invalid"
+                       class="form-control" id="picture">
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Picture is required.
+                </small>
             </div>
-            <div class="col-md-4">
-                <label for="category" class="form-label">Category</label>
-                <select id="category" class="form-select">
-                    <option value="" selected>Choose category</option>
-                    <option value="" text="">BREAKFAST</option>
-                </select>
-            </div>
+
             <div class="col-md-4">
                 <label for="difficulty" class="form-label">Difficulty</label>
-                <select id="difficulty" class="form-select">
+                <select th:field="*{difficulty}" id="difficulty" class="form-select">
                     <option value="" selected>Choose difficulty</option>
-                    <option value="" text="">EASY</option>
+                    <option th:each="d : ${T(com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum).values()}"
+                            th:value="${d}"
+                            th:text="${d}"
+                            th:selected="${d} == *{difficulty}">Difficulty
+                    </option>
                 </select>
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Difficulty is required.
+                </small>
             </div>
 
             <div class="col-md-12">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="4"></textarea>
+                <textarea class="form-control"
+                          name="description"
+                          th:text="*{description}"
+                          th:errorclass="is-invalid"
+                          id="description" rows="4"></textarea>
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Description is required.
+                </small>
             </div>
 
             <div class="col-md-12">
                 <label for="ingredients">Ingredients</label>
-                <textarea class="form-control" id="ingredients" rows="4"></textarea>
+                <textarea class="form-control"
+                          name="ingredients"
+                          th:field="*{ingredients}"
+                          th:errorclass="is-invalid"
+                          id="ingredients" rows="4"></textarea>
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Ingredients is required.
+                </small>
             </div>
 
             <div class="col-md-12">
                 <label for="instructions">Instructions</label>
-                <textarea class="form-control" id="instructions" rows="7"></textarea>
+                <textarea class="form-control"
+                          name="instructions"
+                          th:field="*{instructions}"
+                          th:errorclass="is-invalid"
+                          id="instructions" rows="7"></textarea>
+                <small class="invalid-feedback bg-danger text-light rounded">
+                    Ingredients is required.
+                </small>
             </div>
 
             <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">

@@ -75,15 +75,15 @@
                         </ul>
                     </li>
                     <th:block sec:authorize="!isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/about}">About</a>
-                        </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/users/login}">Login</a>
                     </li>
-                    <li class="nav-item">
+                        <li class="nav-item">
                         <a class="nav-link" th:href="@{/users/register}">Register</a>
                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/about}">About</a>
+                        </li>
                     </th:block>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <form th:action="@{/users/logout}" th:method="post">
