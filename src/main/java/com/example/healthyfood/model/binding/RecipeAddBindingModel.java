@@ -1,9 +1,11 @@
 package com.example.healthyfood.model.binding;
 
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
+import com.example.healthyfood.model.validator.ValidPicture;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -11,7 +13,7 @@ public class RecipeAddBindingModel {
 
     @NotBlank
     private String title;
-    @NotNull
+    @ValidPicture
     private MultipartFile picture;
     @NotNull
     @PositiveOrZero
