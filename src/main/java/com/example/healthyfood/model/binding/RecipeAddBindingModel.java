@@ -1,5 +1,6 @@
 package com.example.healthyfood.model.binding;
 
+import com.example.healthyfood.model.entity.enums.MealCategoryEnum;
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 import com.example.healthyfood.model.validator.ValidPicture;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,7 @@ public class RecipeAddBindingModel {
     private String description;
     @NotNull
     private RecipeDifficultyEnum difficulty;
+    private MealCategoryEnum category;
     @NotBlank
     @Size(min = 5)
     private String ingredients;
@@ -100,6 +102,15 @@ public class RecipeAddBindingModel {
 
     public RecipeAddBindingModel setInstructions(String instructions) {
         this.instructions = instructions;
+        return this;
+    }
+
+    public MealCategoryEnum getCategory() {
+        return category;
+    }
+
+    public RecipeAddBindingModel setCategory(MealCategoryEnum category) {
+        this.category = category;
         return this;
     }
 }

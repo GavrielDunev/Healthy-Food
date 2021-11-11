@@ -1,5 +1,6 @@
 package com.example.healthyfood.model.service;
 
+import com.example.healthyfood.model.entity.enums.MealCategoryEnum;
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ public class RecipeAddServiceModel {
     private Integer cookTime;
     private String description;
     private RecipeDifficultyEnum difficulty;
+    private MealCategoryEnum category;
     private String ingredients;
     private String instructions;
 
@@ -83,6 +85,15 @@ public class RecipeAddServiceModel {
 
     public RecipeAddServiceModel setInstructions(String instructions) {
         this.instructions = instructions;
+        return this;
+    }
+
+    public MealCategoryEnum getCategory() {
+        return category;
+    }
+
+    public RecipeAddServiceModel setCategory(MealCategoryEnum category) {
+        this.category = category;
         return this;
     }
 }
