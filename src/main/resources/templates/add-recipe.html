@@ -68,7 +68,7 @@
                         <option th:each="c : ${T(com.example.healthyfood.model.entity.enums.MealCategoryEnum).values()}"
                                 th:value="${c}"
                                 th:text="${c}"
-                                th:selected="${c} == *{category}">BREAKFAST
+                                th:selected="${c} == *{category}">Category
                         </option>
                     </select>
                     <div th:if="${invalidCategory}" class="mt-3">
