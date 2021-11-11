@@ -11,35 +11,32 @@
 <main>
 
     <section class="py-4 text-center container">
-        <h1 class="fw-light fst-italic text-black">Details</h1>
+        <h1 class="fw-light fst-italic text-black">Recipe details</h1>
     </section>
 
-    <div class="container center details-info">
+    <div class="container center details-info" th:object="${recipe}">
         <h3 class="py-3 fw-normal" id="recipe-title" th:text="*{title}">Recipe title</h3>
-        <img src="/images/profile-pic.png" alt="Profile"
+        <img th:src="*{authorProfilePictureUrl}" alt="Profile"
              class="rounded-circle" height="50" width="50">
         <span>Added by
-                          <a class="username" href="">Username</a>
+                          <a class="username" th:href="@{/users/profile/{authorId}(authorId = *{authorId})}">Username</a>
                       </span>
         <div class="recipe">
             <section id="img-section">
                 <img class="details-img"
-                     src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"
+                     th:src="*{pictureUrl}"
                      alt="Food image">
             </section>
 
             <section id="info-section">
-                <p>
-                    <span style="font-weight: bold;">Prep:</span>
-                    40 min
+                <p class="bold-info">Prep:
+                    <span class="not-bold-info" th:text="|*{prepTime} min|">40 min</span>
                 </p>
-                <p>
-                    <span style="font-weight: bold;">Cook:</span>
-                    40 min
+                <p class="bold-info">Cook:
+                    <span class="not-bold-info" th:text="|*{cookTime} min|">40 min</span>
                 </p>
-                <p>
-                    <span style="font-weight: bold;">Difficulty:</span>
-                    EASY
+                <p class="bold-info">Difficulty:
+                    <span class="not-bold-info" th:text="*{difficulty}">EASY</span>
                 </p>
 
             </section>
@@ -54,22 +51,22 @@
         <hr>
         <section class="section-margin">
             <h4 class="fw-normal">Ingredients:</h4>
-            <p th:text="*{description}">Ingredients</p>
+            <p th:text="*{ingredients}">Ingredients</p>
         </section>
         <hr>
         <section class="section-margin">
             <h4 class="fw-normal">Instructions:</h4>
-            <p th:text="*{description}">Instructions</p>
+            <p th:text="*{instructions}">Instructions</p>
         </section>
 
         <div class="row">
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
-                <a href="#"
+                <a th:href="@{/recipes/edit/{id}(id = *{id})}"
                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
                     Edit recipe</a>
             </div>
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
-                <a href="#"
+                <a th:href="@{/recipes/delete/{id}(id = *{id})}"
                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
                     Delete recipe</a>
             </div>

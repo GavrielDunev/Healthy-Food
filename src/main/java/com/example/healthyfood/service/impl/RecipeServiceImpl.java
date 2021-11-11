@@ -1,5 +1,6 @@
 package com.example.healthyfood.service.impl;
 
+import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 import com.example.healthyfood.repository.RecipeRepository;
 import com.example.healthyfood.service.RecipeService;
@@ -27,5 +28,14 @@ public class RecipeServiceImpl implements RecipeService {
                 .stream()
                 .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeHomeSummaryViewModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public RecipeDetailsViewModel getRecipeDetailsViewById(Long id) {
+
+        return this.recipeRepository.findById(id)
+                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeDetailsViewModel.class))
+                .orElse(null);
+
     }
 }

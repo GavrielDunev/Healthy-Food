@@ -54,6 +54,13 @@ main {
     border-radius: 8px;
 }
 
+.bold-info {
+    font-weight: bold;
+}
+
+.not-bold-info {
+    font-weight: normal;
+}
 
 .login {
     text-align: center;
