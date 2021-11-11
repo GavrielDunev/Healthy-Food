@@ -4,30 +4,31 @@ import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 import com.example.healthyfood.model.validator.ValidPicture;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 
 public class RecipeAddBindingModel {
 
     @NotBlank
+    @Size(min = 5)
     private String title;
     @ValidPicture
     private MultipartFile picture;
     @NotNull
-    @PositiveOrZero
+    @Positive
     private Integer prepTime;
     @NotNull
     @PositiveOrZero
     private Integer cookTime;
     @NotBlank
+    @Size(min = 5)
     private String description;
     @NotNull
     private RecipeDifficultyEnum difficulty;
     @NotBlank
+    @Size(min = 5)
     private String ingredients;
     @NotBlank
+    @Size(min = 5)
     private String instructions;
 
     public String getTitle() {
