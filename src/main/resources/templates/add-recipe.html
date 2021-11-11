@@ -14,7 +14,6 @@
     </section>
 
     <div class="container recipe-form">
-        <th:block th:if="${type} == meal"></th:block>
         <form class="row gy-3"
               th:action="@{/{type}/add(type = ${type} + 's')}"
               th:method="post"
