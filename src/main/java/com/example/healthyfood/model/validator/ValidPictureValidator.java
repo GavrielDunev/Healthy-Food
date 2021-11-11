@@ -7,23 +7,17 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class ValidPictureValidator implements ConstraintValidator<ValidPicture, MultipartFile> {
+
     @Override
     public boolean isValid(MultipartFile multipartFile, ConstraintValidatorContext context) {
 
-        var contentType = multipartFile.getContentType();
-        if (!isSupportedContentType(contentType)) {
-            context.disableDefaultConstraintViolation();
-            context
-                    .buildConstraintViolationWithTemplate("Only JPG and PNG images are allowed.")
-                    .addConstraintViolation();
-            return false;
-        }
+        String contentType = multipartFile.getContentType();
 
-        return true;
+        return isSupportedContentType(contentType);
     }
 
     private boolean isSupportedContentType(String contentType) {
-        var supportedContents = List.of("image/jpg", "image/jpeg", "image/png");
+        List<String> supportedContents = List.of("image/jpg", "image/jpeg", "image/png");
         return supportedContents.contains(contentType);
     }
 }

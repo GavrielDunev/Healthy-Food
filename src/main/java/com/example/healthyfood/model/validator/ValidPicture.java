@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = ValidPictureValidator.class)
 public @interface ValidPicture {
 
-    String message() default "Picture is required!";
+    String message() default "Picture file with one of the following types (.jpg, .jpeg, .png) is required! ";
 
     Class<?>[] groups() default { };
 
