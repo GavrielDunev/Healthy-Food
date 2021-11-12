@@ -69,7 +69,8 @@ public class MealServiceImpl implements MealService {
         RecipeEntity recipe = this.modelMapper.map(recipeAddServiceModel, RecipeEntity.class);
         recipe.setPicture(picture)
                 .setAuthor(author)
-                .setCreated(LocalDateTime.now());
+                .setCreated(LocalDateTime.now())
+                .setMeal(null);
 
         MealEntity mealEntity = new MealEntity()
                 .setRecipe(recipe)

@@ -6,6 +6,7 @@ import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
 import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 import com.example.healthyfood.repository.RecipeRepository;
+import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -18,10 +19,12 @@ import java.util.stream.Collectors;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, ModelMapper modelMapper) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.recipeRepository = recipeRepository;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -87,7 +90,9 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeEntity recipeEntity = this.recipeRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
 
-        this.recipeRepository.delete(recipeEntity);
+        if (this.cloudinaryService.delete(recipeEntity.getPicture().getPublicId())) {
 
+            this.recipeRepository.delete(recipeEntity);
+        }
     }
 }

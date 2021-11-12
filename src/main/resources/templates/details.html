@@ -67,7 +67,6 @@
             </div>
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
                 <form th:action="@{/recipes/delete/{id}(id = *{id})}" th:method="delete">
-                    <input type="hidden" name="public_id" th:value="*{picturePublicId}"/>
                     <button type="submit"
                             class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
                         Delete recipe

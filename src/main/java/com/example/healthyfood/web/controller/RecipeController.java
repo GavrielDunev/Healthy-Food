@@ -8,12 +8,12 @@ import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Controller
@@ -82,15 +82,11 @@ public class RecipeController {
         return "redirect:/recipes/details/" + id;
     }
 
-    @Transactional
+
     @DeleteMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable Long id,
-                               @RequestParam("public_id") String publicId) {
+    public String deleteRecipe(@PathVariable Long id) {
 
-        if (this.cloudinaryService.delete(publicId)) {
-
-            this.recipeService.deleteRecipe(id);
-        }
+        this.recipeService.deleteRecipe(id);
 
         return "redirect:/";
     }

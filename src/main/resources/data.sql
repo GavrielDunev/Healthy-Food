@@ -273,8 +273,8 @@ INSERT INTO desserts(id, recipe_id)
 VALUES (1, 9);
 
 INSERT INTO pictures(id, url, public_id)
-VALUES (11, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636225486/Peanut-Butter-Oatmeal-Bars-001_pek0ak.jpg',
-        'Peanut-Butter-Oatmeal-Bars-001_pek0ak');
+VALUES (11, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636719256/Peanut-Butter-Oatmeal-Bars-013_shyx5j.jpg',
+        'Peanut-Butter-Oatmeal-Bars-013_shyx5j');
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (10, 0, '2021-11-06 21:07',
