@@ -11,6 +11,7 @@ import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;

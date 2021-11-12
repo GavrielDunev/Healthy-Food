@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -19,7 +18,7 @@
         <img th:src="*{authorProfilePictureUrl}" alt="Profile"
              class="rounded-circle" height="50" width="50">
         <span>Added by
-                          <a class="username" th:href="@{/users/profile/{authorId}(authorId = *{authorId})}">Username</a>
+                          <a class="username" th:text="*{authorUsername}" th:href="@{/users/profile/{authorId}(authorId = *{authorId})}">Username</a>
                       </span>
         <div class="recipe">
             <section id="img-section">

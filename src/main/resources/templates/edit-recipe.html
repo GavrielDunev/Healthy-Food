@@ -17,8 +17,7 @@
         <form class="row gy-3"
               th:method="patch"
               th:object="${recipe}"
-              th:action="@{/recipes/edit/{id}(id = *{id})}"
-              enctype="multipart/form-data">
+              th:action="@{/recipes/edit/{id}(id = *{id})}">
             <div class="col-md-7 col-lg-6">
                 <label for="title" class="form-label">Title</label>
                 <input th:field="*{title}"
