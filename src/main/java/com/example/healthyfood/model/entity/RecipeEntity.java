@@ -12,7 +12,7 @@ public class RecipeEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String title;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private PictureEntity picture;
     @Column(nullable = false)
     private Integer prepTime;
@@ -31,11 +31,11 @@ public class RecipeEntity extends BaseEntity {
     private String ingredients;
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String instructions;
-    @OneToOne(mappedBy = "recipe", cascade = CascadeType.MERGE)
+    @OneToOne(mappedBy = "recipe", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     private MealEntity meal;
-    @OneToOne(mappedBy = "recipe")
+    @OneToOne(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private DrinkEntity drink;
-    @OneToOne(mappedBy = "recipe")
+    @OneToOne(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private DessertEntity dessertEntity;
 
     public String getTitle() {

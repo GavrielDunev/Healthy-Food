@@ -36,7 +36,6 @@ public class RecipeController {
         return "details";
     }
 
-
     @GetMapping("/edit/{id}")
     public String editRecipe(@PathVariable Long id, Model model) {
 
@@ -77,6 +76,14 @@ public class RecipeController {
         this.recipeService.editRecipe(recipeEditServiceModel);
 
         return "redirect:/recipes/details/" + id;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable Long id) {
+
+        this.recipeService.deleteRecipe(id);
+
+        return "redirect:/";
     }
 
 }

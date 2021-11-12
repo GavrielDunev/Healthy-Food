@@ -6,12 +6,11 @@ import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
 import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
 import com.example.healthyfood.repository.RecipeRepository;
-import com.example.healthyfood.service.PictureService;
+import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,12 +19,12 @@ import java.util.stream.Collectors;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
-    private final PictureService pictureService;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, PictureService pictureService, ModelMapper modelMapper) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.recipeRepository = recipeRepository;
-        this.pictureService = pictureService;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -83,5 +82,16 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         this.recipeRepository.save(recipeEntity);
+    }
+
+    @Override
+    public void deleteRecipe(Long id) {
+
+        RecipeEntity recipeEntity = this.recipeRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+
+        this.cloudinaryService.delete(recipeEntity.getPicture().getPublicId());
+
+        this.recipeRepository.delete(recipeEntity);
     }
 }

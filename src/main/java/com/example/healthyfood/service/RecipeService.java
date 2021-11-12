@@ -15,4 +15,6 @@ public interface RecipeService {
     RecipeEditViewModel getRecipeEditViewById(Long id);
 
     void editRecipe(RecipeEditServiceModel recipeEditServiceModel);
+
+    void deleteRecipe(Long id);
 }
