@@ -4,7 +4,6 @@ import com.example.healthyfood.model.binding.RecipeEditBindingModel;
 import com.example.healthyfood.model.service.RecipeEditServiceModel;
 import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
-import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @Controller
@@ -21,12 +19,10 @@ import javax.validation.Valid;
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public RecipeController(RecipeService recipeService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
+    public RecipeController(RecipeService recipeService, ModelMapper modelMapper) {
         this.recipeService = recipeService;
-        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -47,7 +43,7 @@ public class RecipeController {
         RecipeEditBindingModel recipeEditBindingModel = this.modelMapper.map(recipeEditView, RecipeEditBindingModel.class)
                 .setIsMeal(recipeEditView.IsMeal());
 
-        model.addAttribute("recipe", recipeEditBindingModel);
+        model.addAttribute("recipeEditBindingModel", recipeEditBindingModel);
 
         return "edit-recipe";
     }

@@ -9,6 +9,7 @@ import com.example.healthyfood.repository.PictureRepository;
 import com.example.healthyfood.repository.UserRepository;
 import com.example.healthyfood.repository.UserRoleRepository;
 import com.example.healthyfood.service.UserService;
+import com.example.healthyfood.web.exception.ObjectNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +45,9 @@ public class UserServiceImpl implements UserService {
     public void registerAndLoginUser(UserRegisterServiceModel userRegisterServiceModel) {
 
         UserRoleEntity userRole = this.userRoleRepository.findByRole(UserRoleEnum.USER);
-        PictureEntity defaultProfilePicture = this.pictureRepository.getById(1L);
+
+        PictureEntity defaultProfilePicture = this.pictureRepository.findById(1L)
+                .orElseThrow(() -> new ObjectNotFoundException("Picture with id 1 was not found!"));
 
         UserEntity newUser = new UserEntity()
                 .setEmail(userRegisterServiceModel.getEmail())
@@ -69,6 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByUsername(String username) {
 
-        return this.userRepository.findByUsername(username).orElse(null);
+        return this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with username " + username + " was not found!"));
     }
 }

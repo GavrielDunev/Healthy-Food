@@ -16,22 +16,22 @@
     <div class="container recipe-form">
         <form class="row gy-3"
               th:method="patch"
-              th:object="${recipe}"
-              th:action="@{/recipes/edit/{id}(id = *{id})}">
+              th:action="@{/recipes/edit/{id}(id = *{id})}"
+              th:object="${recipeEditBindingModel}">
             <div class="col-md-7 col-lg-6">
                 <label for="title" class="form-label">Title</label>
                 <input th:field="*{title}"
                        th:errorclass="is-invalid" type="text" class="form-control" id="title">
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Title must be at least 5 characters long.
                 </small>
             </div>
             <div class="col-md-4 col-lg-3">
                 <label for="prepTime" class="form-label">Prep time (min)</label>
                 <input type="number" th:field="*{prepTime}"
                        th:errorclass="is-invalid" class="form-control" id="prepTime">
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Prep time must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Positive prep time is required.
                 </small>
             </div>
             <div class="col-md-4 col-lg-3">
@@ -39,23 +39,24 @@
                 <input type="number" th:field="*{cookTime}"
                        th:errorclass="is-invalid" class="form-control" id="cookTime">
                 <small class="invalid-feedback errors alert alert-danger">
-                    Title must be between 2 and 20 characters.
+                    Positive or zero cook time is required.
                 </small>
             </div>
-            <div class="col-md-4" th:if="*{category != null}">
+            <div class="col-md-4" th:if="*{isMeal()}">
                 <label for="category" class="form-label">Category</label>
                 <select id="category" th:field="*{category}"
                         class="form-select">
                     <option value="" selected>Choose category</option>
                     <option th:each="c : ${T(com.example.healthyfood.model.entity.enums.MealCategoryEnum).values()}"
                             th:value="${c}"
-                            th:text="${c}"
-                            th:selected="${c} == *{category}">BREAKFAST
+                            th:text="${c}">BREAKFAST
                     </option>
                 </select>
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
-                </small>
+                <div th:if="${invalidCategory}" class="mt-3">
+                    <small class="errors alert alert-danger">
+                        Category is required.
+                    </small>
+                </div>
             </div>
             <div class="col-md-4">
                 <label for="difficulty" class="form-label">Difficulty</label>
@@ -68,8 +69,8 @@
                             th:selected="${d} == *{difficulty}">EASY
                     </option>
                 </select>
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Difficulty is required.
                 </small>
             </div>
 
@@ -77,8 +78,8 @@
                 <label for="description">Description</label>
                 <textarea class="form-control" th:field="*{description}"
                           th:errorclass="is-invalid" id="description" rows="4"></textarea>
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Description is required.
                 </small>
             </div>
 
@@ -86,8 +87,8 @@
                 <label for="ingredients">Ingredients</label>
                 <textarea class="form-control" th:field="*{ingredients}"
                           th:errorclass="is-invalid" id="ingredients" rows="4"></textarea>
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Ingredients are required.
                 </small>
             </div>
 
@@ -95,10 +96,12 @@
                 <label for="instructions">Instructions</label>
                 <textarea class="form-control" th:field="*{instructions}"
                           th:errorclass="is-invalid" id="instructions" rows="7"></textarea>
-                <small class="invalid-feedback bg-danger text-light rounded">
-                    Title must be between 2 and 20 characters.
+                <small class="invalid-feedback errors alert alert-danger">
+                    Instructions are required.
                 </small>
             </div>
+
+            <input type="hidden" name="isMeal" th:value="*{isMeal()}">
 
             <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
                 <button type="submit"

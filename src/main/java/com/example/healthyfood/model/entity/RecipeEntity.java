@@ -3,7 +3,6 @@ package com.example.healthyfood.model.entity;
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity

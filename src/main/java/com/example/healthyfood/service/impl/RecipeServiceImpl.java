@@ -42,14 +42,16 @@ public class RecipeServiceImpl implements RecipeService {
 
         return this.recipeRepository.findById(id)
                 .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeDetailsViewModel.class))
-                .orElse(null);
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
 
     }
 
     @Override
     public RecipeEditViewModel getRecipeEditViewById(Long id) {
 
-        RecipeEntity recipe = this.recipeRepository.findById(id).orElse(null);
+        RecipeEntity recipe = this.recipeRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+
         RecipeEditViewModel recipeEditViewModel = this.modelMapper.map(recipe, RecipeEditViewModel.class);
 
         try {
