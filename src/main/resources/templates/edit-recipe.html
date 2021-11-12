@@ -21,7 +21,8 @@
             <div class="col-md-7 col-lg-6">
                 <label for="title" class="form-label">Title</label>
                 <input th:field="*{title}"
-                       th:errorclass="is-invalid" type="text" class="form-control" id="title">
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control" id="title" required minlength="5">
                 <small class="invalid-feedback errors alert alert-danger">
                     Title must be at least 5 characters long.
                 </small>
@@ -29,7 +30,8 @@
             <div class="col-md-4 col-lg-3">
                 <label for="prepTime" class="form-label">Prep time (min)</label>
                 <input type="number" th:field="*{prepTime}"
-                       th:errorclass="is-invalid" class="form-control" id="prepTime">
+                       th:errorclass="is-invalid"
+                       class="form-control" id="prepTime" required min="1">
                 <small class="invalid-feedback errors alert alert-danger">
                     Positive prep time is required.
                 </small>
@@ -37,7 +39,8 @@
             <div class="col-md-4 col-lg-3">
                 <label for="cookTime" class="form-label">Cook time (min)</label>
                 <input type="number" th:field="*{cookTime}"
-                       th:errorclass="is-invalid" class="form-control" id="cookTime">
+                       th:errorclass="is-invalid"
+                       class="form-control" id="cookTime" required min="0">
                 <small class="invalid-feedback errors alert alert-danger">
                     Positive or zero cook time is required.
                 </small>
@@ -45,7 +48,7 @@
             <div class="col-md-4" th:if="*{isMeal()}">
                 <label for="category" class="form-label">Category</label>
                 <select id="category" th:field="*{category}"
-                        class="form-select">
+                        class="form-select" required>
                     <option value="" selected>Choose category</option>
                     <option th:each="c : ${T(com.example.healthyfood.model.entity.enums.MealCategoryEnum).values()}"
                             th:value="${c}"
@@ -61,7 +64,7 @@
             <div class="col-md-4">
                 <label for="difficulty" class="form-label">Difficulty</label>
                 <select id="difficulty" th:field="*{difficulty}"
-                        th:errorclass="is-invalid" class="form-select">
+                        th:errorclass="is-invalid" class="form-select" required>
                     <option value="" selected>Choose difficulty</option>
                     <option th:each="d : ${T(com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum).values()}"
                             th:value="${d}"
@@ -77,7 +80,8 @@
             <div class="col-md-12">
                 <label for="description">Description</label>
                 <textarea class="form-control" th:field="*{description}"
-                          th:errorclass="is-invalid" id="description" rows="4"></textarea>
+                          th:errorclass="is-invalid"
+                          id="description" rows="4" required minlength="5"></textarea>
                 <small class="invalid-feedback errors alert alert-danger">
                     Description is required.
                 </small>
@@ -86,7 +90,8 @@
             <div class="col-md-12">
                 <label for="ingredients">Ingredients</label>
                 <textarea class="form-control" th:field="*{ingredients}"
-                          th:errorclass="is-invalid" id="ingredients" rows="4"></textarea>
+                          th:errorclass="is-invalid"
+                          id="ingredients" rows="4" required minlength="5"></textarea>
                 <small class="invalid-feedback errors alert alert-danger">
                     Ingredients are required.
                 </small>
@@ -95,7 +100,8 @@
             <div class="col-md-12">
                 <label for="instructions">Instructions</label>
                 <textarea class="form-control" th:field="*{instructions}"
-                          th:errorclass="is-invalid" id="instructions" rows="7"></textarea>
+                          th:errorclass="is-invalid"
+                          id="instructions" rows="7" required minlength="5"></textarea>
                 <small class="invalid-feedback errors alert alert-danger">
                     Instructions are required.
                 </small>
