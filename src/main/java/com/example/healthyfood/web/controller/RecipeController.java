@@ -4,9 +4,11 @@ import com.example.healthyfood.model.binding.RecipeEditBindingModel;
 import com.example.healthyfood.model.service.RecipeEditServiceModel;
 import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
+import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,12 @@ import javax.validation.Valid;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final CloudinaryService cloudinaryService;
     private final ModelMapper modelMapper;
 
-    public RecipeController(RecipeService recipeService, ModelMapper modelMapper) {
+    public RecipeController(RecipeService recipeService, CloudinaryService cloudinaryService, ModelMapper modelMapper) {
         this.recipeService = recipeService;
+        this.cloudinaryService = cloudinaryService;
         this.modelMapper = modelMapper;
     }
 
@@ -78,10 +82,15 @@ public class RecipeController {
         return "redirect:/recipes/details/" + id;
     }
 
+    @Transactional
     @DeleteMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable Long id) {
+    public String deleteRecipe(@PathVariable Long id,
+                               @RequestParam("public_id") String publicId) {
 
-        this.recipeService.deleteRecipe(id);
+        if (this.cloudinaryService.delete(publicId)) {
+
+            this.recipeService.deleteRecipe(id);
+        }
 
         return "redirect:/";
     }

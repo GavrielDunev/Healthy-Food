@@ -18,7 +18,8 @@
         <img th:src="*{authorProfilePictureUrl}" alt="Profile"
              class="rounded-circle" height="50" width="50">
         <span>Added by
-                          <a class="username" th:text="*{authorUsername}" th:href="@{/users/profile/{authorId}(authorId = *{authorId})}">Username</a>
+                          <a class="username" th:text="*{authorUsername}"
+                             th:href="@{/users/profile/{authorId}(authorId = *{authorId})}">Username</a>
                       </span>
         <div class="recipe">
             <section id="img-section">
@@ -65,11 +66,12 @@
                     Edit recipe</a>
             </div>
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
-                <form>
-                <button type="submit" th:action="@{/recipes/delete/{id}(id = *{id})}" th:method="delete"
-                   class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
-                    Delete recipe
-                </button>
+                <form th:action="@{/recipes/delete/{id}(id = *{id})}" th:method="delete">
+                    <input type="hidden" name="public_id" th:value="*{picturePublicId}"/>
+                    <button type="submit"
+                            class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
+                        Delete recipe
+                    </button>
 
                 </form>
             </div>

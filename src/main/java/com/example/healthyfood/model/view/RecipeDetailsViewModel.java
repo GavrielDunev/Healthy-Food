@@ -16,6 +16,7 @@ public class RecipeDetailsViewModel {
     private String authorProfilePictureUrl;
     private Long authorId;
     private String authorUsername;
+    private String picturePublicId;
 
     public Long getId() {
         return id;
@@ -122,6 +123,15 @@ public class RecipeDetailsViewModel {
 
     public RecipeDetailsViewModel setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
+        return this;
+    }
+
+    public String getPicturePublicId() {
+        return picturePublicId;
+    }
+
+    public RecipeDetailsViewModel setPicturePublicId(String picturePublicId) {
+        this.picturePublicId = picturePublicId;
         return this;
     }
 }
