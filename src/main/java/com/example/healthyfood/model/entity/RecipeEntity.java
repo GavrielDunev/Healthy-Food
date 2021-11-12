@@ -31,6 +31,12 @@ public class RecipeEntity extends BaseEntity {
     private String ingredients;
     @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String instructions;
+    @OneToOne(mappedBy = "recipe", cascade = CascadeType.MERGE)
+    private MealEntity meal;
+    @OneToOne(mappedBy = "recipe")
+    private DrinkEntity drink;
+    @OneToOne(mappedBy = "recipe")
+    private DessertEntity dessertEntity;
 
     public String getTitle() {
         return title;
@@ -122,4 +128,30 @@ public class RecipeEntity extends BaseEntity {
         return this;
     }
 
+    public MealEntity getMeal() {
+        return meal;
+    }
+
+    public RecipeEntity setMeal(MealEntity meal) {
+        this.meal = meal;
+        return this;
+    }
+
+    public DrinkEntity getDrink() {
+        return drink;
+    }
+
+    public RecipeEntity setDrink(DrinkEntity drink) {
+        this.drink = drink;
+        return this;
+    }
+
+    public DessertEntity getDessertEntity() {
+        return dessertEntity;
+    }
+
+    public RecipeEntity setDessertEntity(DessertEntity dessertEntity) {
+        this.dessertEntity = dessertEntity;
+        return this;
+    }
 }

@@ -66,8 +66,7 @@
                         <option value="" selected>Choose category</option>
                         <option th:each="c : ${T(com.example.healthyfood.model.entity.enums.MealCategoryEnum).values()}"
                                 th:value="${c}"
-                                th:text="${c}"
-                                th:selected="${c} == *{category}">Category
+                                th:text="${c}">Category
                         </option>
                     </select>
                     <div th:if="${invalidCategory}" class="mt-3">
@@ -86,8 +85,7 @@
                     <option value="" selected>Choose difficulty</option>
                     <option th:each="d : ${T(com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum).values()}"
                             th:value="${d}"
-                            th:text="${d}"
-                            th:selected="${d} == *{difficulty}">Difficulty
+                            th:text="${d}">Difficulty
                     </option>
                 </select>
                 <small class="invalid-feedback errors alert alert-danger">

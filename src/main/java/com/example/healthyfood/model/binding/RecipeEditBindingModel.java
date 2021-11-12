@@ -2,18 +2,15 @@ package com.example.healthyfood.model.binding;
 
 import com.example.healthyfood.model.entity.enums.MealCategoryEnum;
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
-import com.example.healthyfood.model.validator.ValidPicture;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
 
-public class RecipeAddBindingModel {
+public class RecipeEditBindingModel {
 
+    private Long id;
     @NotBlank
     @Size(min = 5)
     private String title;
-    @ValidPicture
-    private MultipartFile picture;
     @NotNull
     @Positive
     private Integer prepTime;
@@ -32,23 +29,23 @@ public class RecipeAddBindingModel {
     @NotBlank
     @Size(min = 5)
     private String instructions;
+    private boolean isMeal;
 
+    public Long getId() {
+        return id;
+    }
+
+    public RecipeEditBindingModel setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getTitle() {
         return title;
     }
 
-    public RecipeAddBindingModel setTitle(String title) {
+    public RecipeEditBindingModel setTitle(String title) {
         this.title = title;
-        return this;
-    }
-
-    public MultipartFile getPicture() {
-        return picture;
-    }
-
-    public RecipeAddBindingModel setPicture(MultipartFile picture) {
-        this.picture = picture;
         return this;
     }
 
@@ -56,7 +53,7 @@ public class RecipeAddBindingModel {
         return prepTime;
     }
 
-    public RecipeAddBindingModel setPrepTime(Integer prepTime) {
+    public RecipeEditBindingModel setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
         return this;
     }
@@ -65,7 +62,7 @@ public class RecipeAddBindingModel {
         return cookTime;
     }
 
-    public RecipeAddBindingModel setCookTime(Integer cookTime) {
+    public RecipeEditBindingModel setCookTime(Integer cookTime) {
         this.cookTime = cookTime;
         return this;
     }
@@ -74,7 +71,7 @@ public class RecipeAddBindingModel {
         return description;
     }
 
-    public RecipeAddBindingModel setDescription(String description) {
+    public RecipeEditBindingModel setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -83,8 +80,17 @@ public class RecipeAddBindingModel {
         return difficulty;
     }
 
-    public RecipeAddBindingModel setDifficulty(RecipeDifficultyEnum difficulty) {
+    public RecipeEditBindingModel setDifficulty(RecipeDifficultyEnum difficulty) {
         this.difficulty = difficulty;
+        return this;
+    }
+
+    public MealCategoryEnum getCategory() {
+        return category;
+    }
+
+    public RecipeEditBindingModel setCategory(MealCategoryEnum category) {
+        this.category = category;
         return this;
     }
 
@@ -92,7 +98,7 @@ public class RecipeAddBindingModel {
         return ingredients;
     }
 
-    public RecipeAddBindingModel setIngredients(String ingredients) {
+    public RecipeEditBindingModel setIngredients(String ingredients) {
         this.ingredients = ingredients;
         return this;
     }
@@ -101,18 +107,17 @@ public class RecipeAddBindingModel {
         return instructions;
     }
 
-    public RecipeAddBindingModel setInstructions(String instructions) {
+    public RecipeEditBindingModel setInstructions(String instructions) {
         this.instructions = instructions;
         return this;
     }
 
-    public MealCategoryEnum getCategory() {
-        return category;
+    public boolean isMeal() {
+        return isMeal;
     }
 
-    public RecipeAddBindingModel setCategory(MealCategoryEnum category) {
-        this.category = category;
+    public RecipeEditBindingModel setIsMeal(boolean meal) {
+        isMeal = meal;
         return this;
     }
-
 }

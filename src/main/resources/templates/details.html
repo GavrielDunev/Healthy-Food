@@ -66,9 +66,13 @@
                     Edit recipe</a>
             </div>
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
-                <a th:href="@{/recipes/delete/{id}(id = *{id})}"
+                <form>
+                <button type="submit" th:action="@{/recipes/delete/{id}(id = *{id})}" th:method="delete"
                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
-                    Delete recipe</a>
+                    Delete recipe
+                </button>
+
+                </form>
             </div>
         </div>
         <hr>
