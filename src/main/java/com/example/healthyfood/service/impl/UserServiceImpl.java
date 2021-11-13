@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
     public void registerAndLoginUser(UserRegisterServiceModel userRegisterServiceModel) {
 
         UserRoleEntity userRole = this.userRoleRepository.findByRole(UserRoleEnum.USER);
+        UserRoleEntity adminRole = this.userRoleRepository.findByRole(UserRoleEnum.ADMIN);
 
         PictureEntity defaultProfilePicture = this.pictureRepository.findById(1L)
                 .orElseThrow(() -> new ObjectNotFoundException("Picture with id 1 was not found!"));
@@ -55,8 +57,16 @@ public class UserServiceImpl implements UserService {
                 .setLastName(userRegisterServiceModel.getLastName())
                 .setPassword(this.passwordEncoder.encode(userRegisterServiceModel.getPassword()))
                 .setUsername(userRegisterServiceModel.getUsername())
-                .setProfilePicture(defaultProfilePicture)
-                .setRoles(Set.of(userRole));
+                .setProfilePicture(defaultProfilePicture);
+
+        Set<UserRoleEntity> roles = new HashSet<>();
+        roles.add(userRole);
+
+        if (this.userRepository.count() == 1) {
+            roles.add(adminRole);
+        }
+
+        newUser.setRoles(roles);
 
         this.userRepository.save(newUser);
 
