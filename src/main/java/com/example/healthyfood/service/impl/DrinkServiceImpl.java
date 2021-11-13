@@ -5,7 +5,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.RecipeEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.repository.DrinkRepository;
 import com.example.healthyfood.service.DrinkService;
 import com.example.healthyfood.service.PictureService;
@@ -34,11 +34,11 @@ public class DrinkServiceImpl implements DrinkService {
     }
 
     @Override
-    public List<RecipeAllSummaryViewModel> getAllDrinkViews() {
+    public List<RecipeSummaryViewModel> getAllDrinkViews() {
 
         return this.drinkRepository.findAllOrderByCreatedDesc()
                 .stream()
-                .map(drinkEntity -> this.modelMapper.map(drinkEntity, RecipeAllSummaryViewModel.class))
+                .map(drinkEntity -> this.modelMapper.map(drinkEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 

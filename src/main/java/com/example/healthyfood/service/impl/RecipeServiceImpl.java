@@ -7,7 +7,7 @@ import com.example.healthyfood.model.entity.enums.UserRoleEnum;
 import com.example.healthyfood.model.service.RecipeEditServiceModel;
 import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
-import com.example.healthyfood.model.view.RecipeHomeSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.repository.RecipeRepository;
 import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
@@ -35,11 +35,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<RecipeHomeSummaryViewModel> getLastSixRecipeViews() {
+    public List<RecipeSummaryViewModel> getLastSixRecipeViews() {
 
         return this.recipeRepository.findLastSixRecipesOrderByCreatedDesc()
                 .stream()
-                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeHomeSummaryViewModel.class))
+                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 

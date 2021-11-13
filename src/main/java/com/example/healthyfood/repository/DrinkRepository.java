@@ -1,7 +1,6 @@
 package com.example.healthyfood.repository;
 
 import com.example.healthyfood.model.entity.DrinkEntity;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -5,7 +5,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.RecipeEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.repository.MealRepository;
 import com.example.healthyfood.service.MealService;
 import com.example.healthyfood.service.PictureService;
@@ -34,29 +34,29 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<RecipeAllSummaryViewModel> getAllBreakfastViews() {
+    public List<RecipeSummaryViewModel> getAllBreakfastViews() {
 
         return this.mealRepository.findAllBreakfastOrderByCreatedDesc()
                 .stream()
-                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
+                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<RecipeAllSummaryViewModel> getAllLunchViews() {
+    public List<RecipeSummaryViewModel> getAllLunchViews() {
 
         return this.mealRepository.findAllLunchOrderByCreatedDesc()
                 .stream()
-                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
+                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<RecipeAllSummaryViewModel> getAllDinnerViews() {
+    public List<RecipeSummaryViewModel> getAllDinnerViews() {
 
         return this.mealRepository.findAllDinnerOrderByCreatedDesc()
                 .stream()
-                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeAllSummaryViewModel.class))
+                .map(mealEntity -> this.modelMapper.map(mealEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 

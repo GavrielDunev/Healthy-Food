@@ -1,19 +1,20 @@
 package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.UserRegisterBindingModel;
+import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
+import com.example.healthyfood.model.view.UserProfileViewModel;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
@@ -71,6 +72,30 @@ public class UserController {
                 .addFlashAttribute("username", username);
 
         return "redirect:/users/login";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model, Principal principal) {
+
+        UserEntity currentUser = this.userService.findByUsername(principal.getName());
+        UserProfileViewModel userProfileViewModel = this.modelMapper.map(currentUser, UserProfileViewModel.class);
+
+        model.addAttribute("user", userProfileViewModel);
+
+        return "profile";
+    }
+
+    @GetMapping("/profile/{id}")
+    public String profile(@PathVariable Long id) {
+        return "profile";
+    }
+
+    @GetMapping("/profile/recipes/{username}")
+    public String userRecipeList(@PathVariable String username) {
+
+        this.userService.findAllUserRecipes(username);
+
+        return "user-recipes";
     }
 
 }

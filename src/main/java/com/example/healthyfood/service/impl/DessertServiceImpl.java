@@ -5,7 +5,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.RecipeEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.repository.DessertRepository;
 import com.example.healthyfood.service.DessertService;
 import com.example.healthyfood.service.PictureService;
@@ -34,11 +34,11 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
-    public List<RecipeAllSummaryViewModel> getAllDessertViews() {
+    public List<RecipeSummaryViewModel> getAllDessertViews() {
 
         return this.dessertRepository.findAllOrderByCreatedDesc()
                 .stream()
-                .map(dessertEntity -> this.modelMapper.map(dessertEntity, RecipeAllSummaryViewModel.class))
+                .map(dessertEntity -> this.modelMapper.map(dessertEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }
 

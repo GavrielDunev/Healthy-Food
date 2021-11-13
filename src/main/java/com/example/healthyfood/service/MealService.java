@@ -1,18 +1,18 @@
 package com.example.healthyfood.service;
 
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface MealService {
 
-    List<RecipeAllSummaryViewModel> getAllBreakfastViews();
+    List<RecipeSummaryViewModel> getAllBreakfastViews();
 
-    List<RecipeAllSummaryViewModel> getAllLunchViews();
+    List<RecipeSummaryViewModel> getAllLunchViews();
 
-    List<RecipeAllSummaryViewModel> getAllDinnerViews();
+    List<RecipeSummaryViewModel> getAllDinnerViews();
 
     void saveMeal(RecipeAddServiceModel recipeAddServiceModel, String username) throws IOException;
 }

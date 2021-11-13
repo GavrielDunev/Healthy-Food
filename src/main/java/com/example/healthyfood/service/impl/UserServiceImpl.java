@@ -5,6 +5,7 @@ import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
 import com.example.healthyfood.model.entity.enums.UserRoleEnum;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.repository.PictureRepository;
 import com.example.healthyfood.repository.UserRepository;
 import com.example.healthyfood.repository.UserRoleRepository;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -84,5 +86,10 @@ public class UserServiceImpl implements UserService {
 
         return this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with username " + username + " was not found!"));
+    }
+
+    @Override
+    public List<RecipeSummaryViewModel> findAllUserRecipes(String username) {
+        return null;
     }
 }

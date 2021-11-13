@@ -2,7 +2,7 @@ package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.RecipeAddBindingModel;
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.service.MealService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -34,34 +34,34 @@ public class MealController {
     @GetMapping("/breakfast")
     public String breakfast(Model model) {
 
-        List<RecipeAllSummaryViewModel> breakfastRecipes = this.mealService.getAllBreakfastViews();
+        List<RecipeSummaryViewModel> breakfastRecipes = this.mealService.getAllBreakfastViews();
 
         model.addAttribute("type", "Breakfast");
         model.addAttribute("recipes", breakfastRecipes);
 
-        return "all-recipes";
+        return "recipes";
     }
 
     @GetMapping("/lunch")
     public String lunch(Model model) {
 
-        List<RecipeAllSummaryViewModel> lunchRecipes = this.mealService.getAllLunchViews();
+        List<RecipeSummaryViewModel> lunchRecipes = this.mealService.getAllLunchViews();
 
         model.addAttribute("type", "Lunch");
         model.addAttribute("recipes", lunchRecipes);
 
-        return "all-recipes";
+        return "recipes";
     }
 
     @GetMapping("/dinner")
     public String dinner(Model model) {
 
-        List<RecipeAllSummaryViewModel> dinnerRecipes = this.mealService.getAllDinnerViews();
+        List<RecipeSummaryViewModel> dinnerRecipes = this.mealService.getAllDinnerViews();
 
         model.addAttribute("type", "Dinner");
         model.addAttribute("recipes", dinnerRecipes);
 
-        return "all-recipes";
+        return "recipes";
     }
 
     @GetMapping("/add")

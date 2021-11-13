@@ -2,7 +2,7 @@ package com.example.healthyfood.model.view;
 
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 
-public class RecipeAllSummaryViewModel {
+public class RecipeSummaryViewModel {
 
     private Long recipeId;
     private String recipeTitle;
@@ -14,7 +14,7 @@ public class RecipeAllSummaryViewModel {
         return recipeId;
     }
 
-    public RecipeAllSummaryViewModel setRecipeId(Long recipeId) {
+    public RecipeSummaryViewModel setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
         return this;
     }
@@ -23,7 +23,7 @@ public class RecipeAllSummaryViewModel {
         return recipeTitle;
     }
 
-    public RecipeAllSummaryViewModel setRecipeTitle(String recipeTitle) {
+    public RecipeSummaryViewModel setRecipeTitle(String recipeTitle) {
         this.recipeTitle = recipeTitle;
         return this;
     }
@@ -32,7 +32,7 @@ public class RecipeAllSummaryViewModel {
         return recipeDescription;
     }
 
-    public RecipeAllSummaryViewModel setRecipeDescription(String recipeDescription) {
+    public RecipeSummaryViewModel setRecipeDescription(String recipeDescription) {
         this.recipeDescription = recipeDescription;
         return this;
     }
@@ -41,7 +41,7 @@ public class RecipeAllSummaryViewModel {
         return recipeDifficulty;
     }
 
-    public RecipeAllSummaryViewModel setRecipeDifficulty(RecipeDifficultyEnum recipeDifficulty) {
+    public RecipeSummaryViewModel setRecipeDifficulty(RecipeDifficultyEnum recipeDifficulty) {
         this.recipeDifficulty = recipeDifficulty;
         return this;
     }
@@ -50,7 +50,7 @@ public class RecipeAllSummaryViewModel {
         return recipePictureUrl;
     }
 
-    public RecipeAllSummaryViewModel setRecipePictureUrl(String recipePictureUrl) {
+    public RecipeSummaryViewModel setRecipePictureUrl(String recipePictureUrl) {
         this.recipePictureUrl = recipePictureUrl;
         return this;
     }

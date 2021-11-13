@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -13,21 +12,21 @@
         <h1 class="fw-light text-black">Profile</h1>
     </section>
 
-    <div class="container center">
+    <div class="container center" th:object="${user}">
 
         <div class="row py-3">
             <div class="col-md-4 mb-3 profile">
                 <div class="card user-pic">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/images/profile-pic.png" alt="Admin"
+                            <img th:src="*{profilePictureUrl}" alt="Picture"
                                  class="rounded-circle" width="150">
-                            <div class="">
+                            <div>
                                 <a href="#"
                                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">Upload
                                     photo</a>
                                 <hr>
-                                <a href="#"
+                                <a th:href="@{/users/profile/recipes/{username}(username = *{username})}"
                                    class="form-button mt-3 mb-1 btn btn-dark d-flex justify-content-center align-items-center">Recipe
                                     list</a>
                             </div>
@@ -44,7 +43,7 @@
                                 <h6 class="mb-0">Username</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <h7 class="mb-0">Username</h7>
+                                <h7 class="mb-0" th:text="*{username}">Username</h7>
                             </div>
                         </div>
                         <hr>
@@ -53,7 +52,7 @@
                                 <h6 class="mb-0">First name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <h7 class="mb-0">First name</h7>
+                                <h7 class="mb-0" th:text="*{firstName}">First name</h7>
                             </div>
                         </div>
                         <hr>
@@ -62,7 +61,7 @@
                                 <h6 class="mb-0">Last name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <h7 class="mb-0">Last name</h7>
+                                <h7 class="mb-0" th:text="*{lastName}">Last name</h7>
                             </div>
                         </div>
                         <hr>
@@ -71,7 +70,7 @@
                                 <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <h7 class="mb-0">Email</h7>
+                                <h7 class="mb-0" th:text="*{email}">Email</h7>
                             </div>
                         </div>
                         <hr>

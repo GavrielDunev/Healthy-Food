@@ -2,7 +2,7 @@ package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.RecipeAddBindingModel;
 import com.example.healthyfood.model.service.RecipeAddServiceModel;
-import com.example.healthyfood.model.view.RecipeAllSummaryViewModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.service.DrinkService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -34,12 +34,12 @@ public class DrinkController {
     @GetMapping()
     public String drinks(Model model) {
 
-        List<RecipeAllSummaryViewModel> drinks = this.drinkService.getAllDrinkViews();
+        List<RecipeSummaryViewModel> drinks = this.drinkService.getAllDrinkViews();
 
         model.addAttribute("type", "Drink");
         model.addAttribute("recipes", drinks);
 
-        return "all-recipes";
+        return "recipes";
     }
 
     @GetMapping("/add")

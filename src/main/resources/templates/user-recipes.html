@@ -8,19 +8,11 @@
 <header th:replace="fragments/commons :: navigation"></header>
 
 <main>
-
     <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light text-black">Are you ready to start eating healthy?</h1>
-                <p class="lead text-bold">Discover new healthy and decilious recipes.</p>
-            </div>
-        </div>
+        <h1 class="fw-light fst-italic text-black" th:text="${type} + ' recipes'">Recipes</h1>
     </section>
-
     <div class="album py-5 bg-light">
         <div class="container">
-            <h3 class="fw-light text-black"><u>Here are some of our latest recipes:</u></h3>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
                 <div class="col" th:each="r : ${recipes}" th:object="${r}">
@@ -50,7 +42,6 @@
     </div>
 
 </main>
-
 
 <footer th:replace="fragments/commons :: footer"></footer>
 
