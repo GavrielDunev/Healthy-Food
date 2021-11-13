@@ -6,6 +6,7 @@ import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
 import com.example.healthyfood.service.RecipeService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/recipes")
@@ -27,17 +29,20 @@ public class RecipeController {
     }
 
     @GetMapping("/details/{id}")
-    public String recipeDetails(@PathVariable Long id, Model model) {
+    public String recipeDetails(@PathVariable Long id, Model model,
+                                Principal principal) {
 
-        RecipeDetailsViewModel recipeDetailsView = this.recipeService.getRecipeDetailsViewById(id);
+        RecipeDetailsViewModel recipeDetailsView = this.recipeService.getRecipeDetailsViewById(id, principal.getName());
 
         model.addAttribute("recipe", recipeDetailsView);
 
         return "details";
     }
 
+    @PreAuthorize("@recipeServiceImpl.isOwner(#id, #principal.name)")
     @GetMapping("/edit/{id}")
-    public String editRecipe(@PathVariable Long id, Model model) {
+    public String editRecipe(@PathVariable Long id, Model model,
+                             Principal principal) {
 
         RecipeEditViewModel recipeEditView = this.recipeService.getRecipeEditViewById(id);
         RecipeEditBindingModel recipeEditBindingModel = this.modelMapper.map(recipeEditView, RecipeEditBindingModel.class)
@@ -54,11 +59,13 @@ public class RecipeController {
         return "edit-recipe";
     }
 
+    @PreAuthorize("@recipeServiceImpl.isOwner(#id, #principal.name)")
     @PatchMapping("/edit/{id}")
     public String editRecipeConfirm(@PathVariable Long id,
                                     @Valid RecipeEditBindingModel recipeEditBindingModel,
                                     BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes) {
+                                    RedirectAttributes redirectAttributes,
+                                    Principal principal) {
 
         if (bindingResult.hasErrors() || (recipeEditBindingModel.getCategory() == null && recipeEditBindingModel.isMeal())) {
             redirectAttributes.addFlashAttribute("recipeEditBindingModel", recipeEditBindingModel);
@@ -78,9 +85,10 @@ public class RecipeController {
         return "redirect:/recipes/details/" + id;
     }
 
-
+    @PreAuthorize("@recipeServiceImpl.isOwner(#id, #principal.name)")
     @DeleteMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable Long id) {
+    public String deleteRecipe(@PathVariable Long id,
+                               Principal principal) {
 
         this.recipeService.deleteRecipe(id);
 

@@ -10,11 +10,13 @@ import java.util.List;
 public interface RecipeService {
     List<RecipeHomeSummaryViewModel> getLastSixRecipeViews();
 
-    RecipeDetailsViewModel getRecipeDetailsViewById(Long id);
+    RecipeDetailsViewModel getRecipeDetailsViewById(Long id, String username);
 
     RecipeEditViewModel getRecipeEditViewById(Long id);
 
     void editRecipe(RecipeEditServiceModel recipeEditServiceModel);
 
     void deleteRecipe(Long id);
+
+    boolean isOwner(Long id, String username);
 }

@@ -10,11 +10,11 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import java.util.Map;
 
 @Configuration
-public class ApplicationConfiguration {
+public class ApplicationBeanConfiguration {
 
     private final CloudinaryConfiguration cloudinaryConfiguration;
 
-    public ApplicationConfiguration(CloudinaryConfiguration cloudinaryConfiguration) {
+    public ApplicationBeanConfiguration(CloudinaryConfiguration cloudinaryConfiguration) {
         this.cloudinaryConfiguration = cloudinaryConfiguration;
     }
 

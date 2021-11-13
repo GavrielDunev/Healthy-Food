@@ -16,6 +16,7 @@ public class RecipeDetailsViewModel {
     private String authorProfilePictureUrl;
     private Long authorId;
     private String authorUsername;
+    private boolean isOwner;
 
     public Long getId() {
         return id;
@@ -125,4 +126,12 @@ public class RecipeDetailsViewModel {
         return this;
     }
 
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public RecipeDetailsViewModel setIsOwner(boolean isOwner) {
+        this.isOwner = isOwner;
+        return this;
+    }
 }

@@ -59,7 +59,7 @@
             <p th:text="*{instructions}">Instructions</p>
         </section>
 
-        <div class="row">
+        <div class="row" th:if="*{isOwner()}">
             <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
                 <a th:href="@{/recipes/edit/{id}(id = *{id})}"
                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
