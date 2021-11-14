@@ -1,8 +1,10 @@
 package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.UserRegisterBindingModel;
+import com.example.healthyfood.model.binding.UserUploadPhotoBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
+import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileViewModel;
 import com.example.healthyfood.service.UserService;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -87,8 +90,7 @@ public class UserController {
     }
 
     @GetMapping("/profile/recipes/{username}")
-    public String userRecipeList(@PathVariable String username,
-                                 Model model) {
+    public String userRecipeList(@PathVariable String username, Model model) {
 
         List<RecipeSummaryViewModel> userRecipes = this.userService.findAllUserRecipes(username);
 
@@ -98,4 +100,41 @@ public class UserController {
         return "user-recipes";
     }
 
+    @GetMapping("/profile/upload-photo/{username}")
+    public String uploadPhoto(@PathVariable String username, Model model) {
+
+        if (!model.containsAttribute("userUploadPhotoBindingModel")) {
+            model.addAttribute("userUploadPhotoBindingModel", new UserUploadPhotoBindingModel());
+        }
+
+        return "upload-photo";
+    }
+
+    @PostMapping("/profile/upload-photo/{username}")
+    public String uploadPhotoConfirm(@PathVariable String username,
+                                     @Valid UserUploadPhotoBindingModel userUploadPhotoBindingModel,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userUploadPhotoBindingModel", userUploadPhotoBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userUploadPhotoBindingModel", bindingResult);
+
+            return "redirect:/users/profile/upload-photo/" + username;
+        }
+
+        UserUploadPhotoServiceModel userUploadPhotoServiceModel = this.modelMapper.map(userUploadPhotoBindingModel, UserUploadPhotoServiceModel.class);
+
+        this.userService.uploadProfilePicture(username, userUploadPhotoServiceModel);
+
+        return "redirect:/users/profile/" + username;
+    }
+
+    @DeleteMapping("/profile/delete-photo/{username}")
+    public String deletePhoto(@PathVariable String username) {
+
+        this.userService.deleteProfilePicture(username);
+
+        return "redirect:/users/profile/" + username;
+    }
 }

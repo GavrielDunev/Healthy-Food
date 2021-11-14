@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -13,19 +12,19 @@
         <h1 class="fw-light text-black">Upload photo</h1>
     </section>
 
-    <div class="col-sm-8 col-md-5 col-lg-3 m-auto">
-        <div class="col-md">
-            <div class="form-floating">
-                <input type="url" class="form-control" id="floatingInputGrid" placeholder="https://photo.com" value="">
-                <label for="floatingInputGrid">Photo URL</label>
+    <div class="col-sm-8 col-md-5 col-lg-3 m-auto mt-3">
+        <form th:action="@{/users/profile/upload-photo/{username}(username = ${#authentication.name})}"
+              th:method="post"
+              enctype="multipart/form-data">
+            <input type="file" class="form-control" id="floatingInputGrid" placeholder="Photo"
+                   th:field="${userUploadPhotoBindingModel.picture}">
+            <div class="col-sm-5 col-md-5 col-lg-6 mx-auto">
+                <button type="submit"
+                        class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
+                    Submit
+                </button>
             </div>
-        </div>
-        <div class="col-sm-5 col-md-5 col-lg-6 mx-auto">
-            <button type="submit"
-                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
-                Submit
-            </button>
-        </div>
+        </form>
     </div>
 
 

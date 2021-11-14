@@ -22,13 +22,22 @@
                             <img th:src="*{profilePictureUrl}" alt="Picture"
                                  class="rounded-circle" width="150">
                             <div>
-                                <a href="#"
+                                <a th:href="@{/users/profile/upload-photo/{username}(username = *{username})}"
                                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">Upload
                                     photo</a>
+
+                                <form th:action="@{/users/profile/delete-photo/{username}(username = *{username})}"
+                                      th:method="delete">
+                                    <button type="submit"
+                                            class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
+                                        Delete photo
+                                    </button>
+                                </form>
+
                                 <hr>
                                 <a th:href="@{/users/profile/recipes/{username}(username = *{username})}"
-                                   class="form-button mt-3 mb-1 btn btn-dark d-flex justify-content-center align-items-center">Recipe
-                                    list</a>
+                                   class="form-button mt-3 mb-1 btn btn-dark d-flex justify-content-center align-items-center">User's
+                                    recipes</a>
                             </div>
                         </div>
                     </div>
