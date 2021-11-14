@@ -3,6 +3,7 @@ package com.example.healthyfood.web.controller;
 import com.example.healthyfood.model.binding.UserRegisterBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
+import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileViewModel;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -65,7 +66,7 @@ public class UserController {
 
     @PostMapping("/login-error")
     public String invalidLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-                               String username,
+                                       String username,
                                RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("invalidCredentials", true)
@@ -74,10 +75,10 @@ public class UserController {
         return "redirect:/users/login";
     }
 
-    @GetMapping("/profile")
-    public String profile(Model model, Principal principal) {
+    @GetMapping("/profile/{username}")
+    public String profile(@PathVariable String username, Model model) {
 
-        UserEntity currentUser = this.userService.findByUsername(principal.getName());
+        UserEntity currentUser = this.userService.findByUsername(username);
         UserProfileViewModel userProfileViewModel = this.modelMapper.map(currentUser, UserProfileViewModel.class);
 
         model.addAttribute("user", userProfileViewModel);
@@ -85,15 +86,14 @@ public class UserController {
         return "profile";
     }
 
-    @GetMapping("/profile/{id}")
-    public String profile(@PathVariable Long id) {
-        return "profile";
-    }
-
     @GetMapping("/profile/recipes/{username}")
-    public String userRecipeList(@PathVariable String username) {
+    public String userRecipeList(@PathVariable String username,
+                                 Model model) {
 
-        this.userService.findAllUserRecipes(username);
+        List<RecipeSummaryViewModel> userRecipes = this.userService.findAllUserRecipes(username);
+
+        model.addAttribute("recipes", userRecipes)
+                .addAttribute("username", username + "'s");
 
         return "user-recipes";
     }

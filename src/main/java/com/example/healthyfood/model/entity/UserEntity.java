@@ -1,7 +1,6 @@
 package com.example.healthyfood.model.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,6 +21,8 @@ public class UserEntity extends BaseEntity {
     private PictureEntity profilePicture;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> roles;
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    private Set<RecipeEntity> recipes;
 
     public String getUsername() {
         return username;
@@ -83,6 +84,15 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public Set<RecipeEntity> getRecipes() {
+        return recipes;
+    }
+
+    public UserEntity setRecipes(Set<RecipeEntity> recipes) {
+        this.recipes = recipes;
         return this;
     }
 }

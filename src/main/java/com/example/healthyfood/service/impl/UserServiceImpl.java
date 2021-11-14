@@ -11,6 +11,7 @@ import com.example.healthyfood.repository.UserRepository;
 import com.example.healthyfood.repository.UserRoleRepository;
 import com.example.healthyfood.service.UserService;
 import com.example.healthyfood.web.exception.ObjectNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,13 +32,15 @@ public class UserServiceImpl implements UserService {
     private final PictureRepository pictureRepository;
     private final PasswordEncoder passwordEncoder;
     private final HealthyFoodUserServiceImpl healthyFoodUserService;
+    private final ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PictureRepository pictureRepository, PasswordEncoder passwordEncoder, HealthyFoodUserServiceImpl healthyFoodUserService) {
+    public UserServiceImpl(UserRepository userRepository, UserRoleRepository userRoleRepository, PictureRepository pictureRepository, PasswordEncoder passwordEncoder, HealthyFoodUserServiceImpl healthyFoodUserService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
         this.pictureRepository = pictureRepository;
         this.passwordEncoder = passwordEncoder;
         this.healthyFoodUserService = healthyFoodUserService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -90,6 +94,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<RecipeSummaryViewModel> findAllUserRecipes(String username) {
-        return null;
+
+        UserEntity userEntity = findByUsername(username);
+
+        return userEntity.getRecipes()
+                .stream()
+                .sorted((r1, r2) -> r2.getCreated().compareTo(r1.getCreated()))
+                .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeSummaryViewModel.class))
+                .collect(Collectors.toList());
     }
 }

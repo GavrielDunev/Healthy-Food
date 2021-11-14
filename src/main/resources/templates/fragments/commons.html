@@ -63,7 +63,7 @@
                         <a class="nav-link" th:href="@{/desserts}">Desserts</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/users/profile}">My profile</a>
+                        <a class="nav-link" th:href="@{/users/profile/{username}(username = ${#authentication.name})}">My profile</a>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link dropdown-toggle" href="#" role="button"
