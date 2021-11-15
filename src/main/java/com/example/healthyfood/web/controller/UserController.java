@@ -1,9 +1,11 @@
 package com.example.healthyfood.web.controller;
 
+import com.example.healthyfood.model.binding.UserChangePasswordBindingModel;
 import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.binding.UserRegisterBindingModel;
 import com.example.healthyfood.model.binding.UserUploadPhotoBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
+import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
 import com.example.healthyfood.model.service.UserProfileEditServiceModel;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
 import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
@@ -45,10 +47,16 @@ public class UserController {
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword()
-                .equals(userRegisterBindingModel.getConfirmPassword())) {
+        boolean notMatchingPasswords = !userRegisterBindingModel.getPassword()
+                .equals(userRegisterBindingModel.getConfirmPassword());
+
+        if (bindingResult.hasErrors() || notMatchingPasswords) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+
+            if (notMatchingPasswords) {
+                redirectAttributes.addFlashAttribute("notMatchingPasswords", true);
+            }
 
             return "redirect:/users/register";
         }
@@ -176,5 +184,49 @@ public class UserController {
         this.userService.editUserProfile(username, userProfileEditServiceModel);
 
         return "redirect:/users/profile/" + username;
+    }
+
+    @GetMapping("/profile/change-password/{username}")
+    public String changePassword(@PathVariable String username) {
+
+        return "change-password";
+    }
+
+    @PatchMapping("/profile/change-password/{username}")
+    public String changePasswordConfirm(@PathVariable String username,
+                                        @Valid UserChangePasswordBindingModel userChangePasswordBindingModel,
+                                        BindingResult bindingResult,
+                                        RedirectAttributes redirectAttributes) {
+
+        boolean notMatchingPasswords = !userChangePasswordBindingModel.getNewPassword()
+                .equals(userChangePasswordBindingModel.getConfirmNewPassword());
+
+        boolean invalidCurrentPassword = !this.userService.isCurrentPasswordValid(username,
+                userChangePasswordBindingModel.getCurrentPassword());
+
+        if (bindingResult.hasErrors() || notMatchingPasswords
+                || invalidCurrentPassword) {
+            redirectAttributes.addFlashAttribute("userChangePasswordBindingModel", userChangePasswordBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userChangePasswordBindingModel", bindingResult);
+
+            if (invalidCurrentPassword) {
+                redirectAttributes.addFlashAttribute("invalidCurrentPassword", true);
+            } else if (notMatchingPasswords) {
+                redirectAttributes.addFlashAttribute("notMatchingPasswords", true);
+            }
+
+            return "redirect:/users/profile/change-password/" + username;
+        }
+
+        UserChangePasswordServiceModel userChangePasswordServiceModel = this.modelMapper.map(userChangePasswordBindingModel, UserChangePasswordServiceModel.class);
+
+        this.userService.changePassword(username, userChangePasswordServiceModel);
+
+        return "redirect:/users/profile/" + username;
+    }
+
+    @ModelAttribute
+    public UserChangePasswordBindingModel userChangePasswordBindingModel() {
+        return new UserChangePasswordBindingModel();
     }
 }

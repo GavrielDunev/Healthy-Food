@@ -5,6 +5,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
 import com.example.healthyfood.model.entity.enums.UserRoleEnum;
+import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
 import com.example.healthyfood.model.service.UserProfileEditServiceModel;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
 import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
@@ -153,6 +154,23 @@ public class UserServiceImpl implements UserService {
         userEntity.setFirstName(userProfileEditServiceModel.getFirstName())
                 .setLastName(userProfileEditServiceModel.getLastName())
                 .setEmail(userProfileEditServiceModel.getEmail());
+
+        this.userRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean isCurrentPasswordValid(String username, String currentPassword) {
+
+        UserEntity userEntity = findByUsername(username);
+
+        return this.passwordEncoder.matches(currentPassword, userEntity.getPassword());
+    }
+
+    @Override
+    public void changePassword(String username, UserChangePasswordServiceModel userChangePasswordServiceModel) {
+        UserEntity userEntity = findByUsername(username);
+
+        userEntity.setPassword(this.passwordEncoder.encode(userChangePasswordServiceModel.getNewPassword()));
 
         this.userRepository.save(userEntity);
     }

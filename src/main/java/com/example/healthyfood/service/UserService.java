@@ -2,6 +2,7 @@ package com.example.healthyfood.service;
 
 import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
+import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
 import com.example.healthyfood.model.service.UserProfileEditServiceModel;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
 import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
@@ -27,4 +28,8 @@ public interface UserService {
     UserProfileEditViewModel getUserProfileEditViewModel(String username);
 
     void editUserProfile(String username, UserProfileEditServiceModel userProfileEditServiceModel);
+
+    boolean isCurrentPasswordValid(String username, String currentPassword);
+
+    void changePassword(String username, UserChangePasswordServiceModel userChangePasswordServiceModel);
 }

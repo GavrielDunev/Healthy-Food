@@ -76,6 +76,9 @@
                     Confirm password length must be at least 8 characters long.</small>
             </div>
 
+            <small th:if="${notMatchingPasswords}" class="errors alert alert-danger">
+                Passwords do not match!</small>
+
             <div class="row justify-content-center">
                 <div class="col col-md-4">
                     <div class="button-holder d-flex">
