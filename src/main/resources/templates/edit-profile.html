@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -15,36 +14,43 @@
 
     <div class="container center">
 
-        <form class="col-md-6 form">
+        <form class="col-md-6 form"
+              th:object="${userProfileEditBindingModel}"
+              th:action="@{/users/profile/edit-profile/{username}(username = ${#authentication.name})}"
+              th:method="patch">
             <div class="card mb-3 user-info">
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group input-field d-flex flex-column mt-3">
-                            <label for="username">Username</label>
-                            <input id="username" name="username" type="text" class="form-control"
-                                   placeholder="Enter username">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group input-field d-flex flex-column mt-3">
                             <label for="first-name">First name</label>
                             <input id="first-name" name="first-name" type="text" class="form-control"
+                                   th:field="*{firstName}"
+                                   th:errorclass="is-invalid"
                                    placeholder="Enter first name">
+                            <small class="invalid-feedback errors alert alert-danger">
+                                First name length must be between 3 and 20 characters.</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group input-field d-flex flex-column mt-3">
                             <label for="last-name">Last name</label>
                             <input id="last-name" name="last-name" type="text" class="form-control"
+                                   th:field="*{lastName}"
+                                   th:errorclass="is-invalid"
                                    placeholder="Enter last name">
+                            <small class="invalid-feedback errors alert alert-danger">
+                                Last name length must be between 3 and 20 characters.</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group input-field d-flex flex-column mt-3">
                             <label for="email">Email</label>
                             <input id="email" name="email" type="email" class="form-control"
+                                   th:field="*{email}"
+                                   th:errorclass="is-invalid"
                                    placeholder="Enter email">
+                            <small class="invalid-feedback errors alert alert-danger">
+                                Enter valid email address.</small>
                         </div>
                     </div>
 

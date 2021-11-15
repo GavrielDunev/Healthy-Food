@@ -1,12 +1,15 @@
 package com.example.healthyfood.service.impl;
 
+import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
 import com.example.healthyfood.model.entity.enums.UserRoleEnum;
+import com.example.healthyfood.model.service.UserProfileEditServiceModel;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
 import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
+import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.repository.UserRepository;
 import com.example.healthyfood.repository.UserRoleRepository;
 import com.example.healthyfood.service.CloudinaryService;
@@ -17,6 +20,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -132,6 +136,25 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(userEntity);
 
         deleteCurrentProfilePicture(userEntity);
+    }
+
+    @Override
+    public UserProfileEditViewModel getUserProfileEditViewModel(String username) {
+
+        UserEntity userEntity = findByUsername(username);
+
+        return this.modelMapper.map(userEntity, UserProfileEditViewModel.class);
+    }
+
+    @Override
+    public void editUserProfile(String username, UserProfileEditServiceModel userProfileEditServiceModel) {
+        UserEntity userEntity = findByUsername(username);
+
+        userEntity.setFirstName(userProfileEditServiceModel.getFirstName())
+                .setLastName(userProfileEditServiceModel.getLastName())
+                .setEmail(userProfileEditServiceModel.getEmail());
+
+        this.userRepository.save(userEntity);
     }
 
     private void deleteCurrentProfilePicture(UserEntity userEntity) {

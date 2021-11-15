@@ -1,11 +1,14 @@
 package com.example.healthyfood.web.controller;
 
+import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.binding.UserRegisterBindingModel;
 import com.example.healthyfood.model.binding.UserUploadPhotoBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
+import com.example.healthyfood.model.service.UserProfileEditServiceModel;
 import com.example.healthyfood.model.service.UserRegisterServiceModel;
 import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
+import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.model.view.UserProfileViewModel;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -138,5 +141,34 @@ public class UserController {
         return "redirect:/users/profile/" + username;
     }
 
+    @GetMapping("/profile/edit-profile/{username}")
+    public String editProfile(@PathVariable String username, Model model) {
 
+        UserProfileEditViewModel userProfileEditViewModel = this.userService.getUserProfileEditViewModel(username);
+        UserProfileEditBindingModel userProfileEditBindingModel = this.modelMapper.map(userProfileEditViewModel, UserProfileEditBindingModel.class);
+
+        model.addAttribute("userProfileEditBindingModel", userProfileEditBindingModel);
+
+        return "edit-profile";
+    }
+
+    @PatchMapping("/profile/edit-profile/{username}")
+    public String editProfileConfirm(@PathVariable String username,
+                                     @Valid UserProfileEditBindingModel userProfileEditBindingModel,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userProfileEditBindingModel", userProfileEditBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditBindingModel", bindingResult);
+
+            return "redirect:/users/profile/edit-profile/" + username;
+        }
+
+        UserProfileEditServiceModel userProfileEditServiceModel = this.modelMapper.map(userProfileEditBindingModel, UserProfileEditServiceModel.class);
+
+        this.userService.editUserProfile(username, userProfileEditServiceModel);
+
+        return "redirect:/users/profile/" + username;
+    }
 }

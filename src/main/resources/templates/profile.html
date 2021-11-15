@@ -85,12 +85,12 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
-                                <a href="#"
+                                <a th:href="@{/users/profile/edit-profile/{username}(username = ${#authentication.name})}"
                                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
                                 >Edit profile</a>
                             </div>
                             <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
-                                <a href="#"
+                                <a th:href="@{/users/profile/change-password/{username}(username = ${#authentication.name})}"
                                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
                                 >Change password</a>
                             </div>
