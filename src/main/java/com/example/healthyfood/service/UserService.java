@@ -1,6 +1,5 @@
 package com.example.healthyfood.service;
 
-import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
 import com.example.healthyfood.model.service.UserProfileEditServiceModel;
@@ -32,4 +31,6 @@ public interface UserService {
     boolean isCurrentPasswordValid(String username, String currentPassword);
 
     void changePassword(String username, UserChangePasswordServiceModel userChangePasswordServiceModel);
+
+    boolean isCurrentUser(String currentUserUsername, String username);
 }

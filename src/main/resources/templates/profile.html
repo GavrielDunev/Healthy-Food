@@ -22,18 +22,19 @@
                             <img th:src="*{profilePictureUrl}" alt="Picture"
                                  class="rounded-circle" width="150">
                             <div>
-                                <a th:href="@{/users/profile/upload-photo/{username}(username = *{username})}"
-                                   class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">Upload
-                                    photo</a>
+                                <th:block th:if="${isCurrentUser}">
+                                    <a th:href="@{/users/profile/upload-photo/{username}(username = *{username})}"
+                                       class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">Upload
+                                        photo</a>
 
-                                <form th:action="@{/users/profile/delete-photo/{username}(username = *{username})}"
-                                      th:method="delete">
-                                    <button type="submit"
-                                            class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
-                                        Delete photo
-                                    </button>
-                                </form>
-
+                                    <form th:action="@{/users/profile/delete-photo/{username}(username = *{username})}"
+                                          th:method="delete">
+                                        <button type="submit"
+                                                class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
+                                            Delete photo
+                                        </button>
+                                    </form>
+                                </th:block>
                                 <hr>
                                 <a th:href="@{/users/profile/recipes/{username}(username = *{username})}"
                                    class="form-button mt-3 mb-1 btn btn-dark d-flex justify-content-center align-items-center">User's
@@ -83,18 +84,20 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
-                                <a th:href="@{/users/profile/edit-profile/{username}(username = ${#authentication.name})}"
-                                   class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
-                                >Edit profile</a>
+                        <th:block th:if="${isCurrentUser}">
+                            <div class="row">
+                                <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
+                                    <a th:href="@{/users/profile/edit-profile/{username}(username = *{username})}"
+                                       class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
+                                    >Edit profile</a>
+                                </div>
+                                <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
+                                    <a th:href="@{/users/profile/change-password/{username}(username = *{username})}"
+                                       class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
+                                    >Change password</a>
+                                </div>
                             </div>
-                            <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
-                                <a th:href="@{/users/profile/change-password/{username}(username = ${#authentication.name})}"
-                                   class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center"
-                                >Change password</a>
-                            </div>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
             </div>

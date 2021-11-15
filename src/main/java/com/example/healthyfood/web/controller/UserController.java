@@ -14,6 +14,7 @@ import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.model.view.UserProfileViewModel;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -90,12 +92,14 @@ public class UserController {
     }
 
     @GetMapping("/profile/{username}")
-    public String profile(@PathVariable String username, Model model) {
+    public String profile(@PathVariable String username, Model model,
+                          Principal principal) {
 
         UserEntity currentUser = this.userService.findByUsername(username);
         UserProfileViewModel userProfileViewModel = this.modelMapper.map(currentUser, UserProfileViewModel.class);
 
         model.addAttribute("user", userProfileViewModel);
+        model.addAttribute("isCurrentUser", principal.getName().equals(username));
 
         return "profile";
     }
@@ -111,21 +115,26 @@ public class UserController {
         return "user-recipes";
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @GetMapping("/profile/upload-photo/{username}")
-    public String uploadPhoto(@PathVariable String username, Model model) {
+    public String uploadPhoto(@PathVariable String username, Model model,
+                              Principal principal) {
 
         if (!model.containsAttribute("userUploadPhotoBindingModel")) {
-            model.addAttribute("userUploadPhotoBindingModel", new UserUploadPhotoBindingModel());
+            model.addAttribute("userUploadPhotoBindingModel", new UserUploadPhotoBindingModel()
+                    .setUsername(username));
         }
 
         return "upload-photo";
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @PostMapping("/profile/upload-photo/{username}")
     public String uploadPhotoConfirm(@PathVariable String username,
                                      @Valid UserUploadPhotoBindingModel userUploadPhotoBindingModel,
                                      BindingResult bindingResult,
-                                     RedirectAttributes redirectAttributes) throws IOException {
+                                     RedirectAttributes redirectAttributes,
+                                     Principal principal) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userUploadPhotoBindingModel", userUploadPhotoBindingModel)
@@ -141,16 +150,19 @@ public class UserController {
         return "redirect:/users/profile/" + username;
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @DeleteMapping("/profile/delete-photo/{username}")
-    public String deletePhoto(@PathVariable String username) {
+    public String deletePhoto(@PathVariable String username, Principal principal) {
 
         this.userService.deleteProfilePicture(username);
 
         return "redirect:/users/profile/" + username;
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @GetMapping("/profile/edit-profile/{username}")
-    public String editProfile(@PathVariable String username, Model model) {
+    public String editProfile(@PathVariable String username, Model model,
+                              Principal principal) {
 
         UserProfileEditViewModel userProfileEditViewModel = this.userService.getUserProfileEditViewModel(username);
         UserProfileEditBindingModel userProfileEditBindingModel = this.modelMapper.map(userProfileEditViewModel, UserProfileEditBindingModel.class);
@@ -160,17 +172,21 @@ public class UserController {
         return "edit-profile";
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @GetMapping("/profile/edit-profile/errors/{username}")
-    public String EditProfileErrors(@PathVariable String username) {
+    public String EditProfileErrors(@PathVariable String username,
+                                    Principal principal) {
 
         return "edit-profile";
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @PatchMapping("/profile/edit-profile/{username}")
     public String editProfileConfirm(@PathVariable String username,
                                      @Valid UserProfileEditBindingModel userProfileEditBindingModel,
                                      BindingResult bindingResult,
-                                     RedirectAttributes redirectAttributes) {
+                                     RedirectAttributes redirectAttributes,
+                                     Principal principal) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userProfileEditBindingModel", userProfileEditBindingModel);
@@ -186,17 +202,20 @@ public class UserController {
         return "redirect:/users/profile/" + username;
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @GetMapping("/profile/change-password/{username}")
-    public String changePassword(@PathVariable String username) {
+    public String changePassword(@PathVariable String username, Principal principal) {
 
         return "change-password";
     }
 
+    @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
     @PatchMapping("/profile/change-password/{username}")
     public String changePasswordConfirm(@PathVariable String username,
                                         @Valid UserChangePasswordBindingModel userChangePasswordBindingModel,
                                         BindingResult bindingResult,
-                                        RedirectAttributes redirectAttributes) {
+                                        RedirectAttributes redirectAttributes,
+                                        Principal principal) {
 
         boolean notMatchingPasswords = !userChangePasswordBindingModel.getNewPassword()
                 .equals(userChangePasswordBindingModel.getConfirmNewPassword());

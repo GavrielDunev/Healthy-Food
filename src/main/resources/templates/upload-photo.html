@@ -13,13 +13,14 @@
     </section>
 
     <div class="col-sm-8 col-md-5 col-lg-3 m-auto mt-3">
-        <form th:action="@{/users/profile/upload-photo/{username}(username = ${#authentication.name})}"
+        <form th:object="${userUploadPhotoBindingModel}"
+                th:action="@{/users/profile/upload-photo/{username}(username = *{username})}"
               th:method="post"
               enctype="multipart/form-data">
             <input type="file" class="form-control" id="floatingInputGrid" placeholder="Photo"
-                   th:field="${userUploadPhotoBindingModel.picture}"
+                   th:field="*{picture}"
                    th:errorclass="is-invalid" required>
-            <small th:errors="${userUploadPhotoBindingModel.picture}" class="invalid-feedback errors alert alert-danger">
+            <small th:errors="*{picture}" class="invalid-feedback errors alert alert-danger">
                 Picture is required.
             </small>
             <div class="col-sm-5 col-md-5 col-lg-6 mx-auto">

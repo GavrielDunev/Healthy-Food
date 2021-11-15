@@ -1,6 +1,5 @@
 package com.example.healthyfood.service.impl;
 
-import com.example.healthyfood.model.binding.UserProfileEditBindingModel;
 import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
@@ -21,7 +20,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -173,6 +171,11 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(this.passwordEncoder.encode(userChangePasswordServiceModel.getNewPassword()));
 
         this.userRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean isCurrentUser(String currentUserUsername, String username) {
+        return currentUserUsername.equals(username);
     }
 
     private void deleteCurrentProfilePicture(UserEntity userEntity) {

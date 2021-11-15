@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UserUploadPhotoBindingModel {
 
+    private String username;
     @ValidPicture
     private MultipartFile picture;
 
@@ -14,6 +15,15 @@ public class UserUploadPhotoBindingModel {
 
     public UserUploadPhotoBindingModel setPicture(MultipartFile picture) {
         this.picture = picture;
+        return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public UserUploadPhotoBindingModel setUsername(String username) {
+        this.username = username;
         return this;
     }
 }
