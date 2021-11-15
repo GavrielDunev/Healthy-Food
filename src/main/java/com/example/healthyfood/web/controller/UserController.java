@@ -152,6 +152,12 @@ public class UserController {
         return "edit-profile";
     }
 
+    @GetMapping("/profile/edit-profile/errors/{username}")
+    public String EditProfileErrors(@PathVariable String username) {
+
+        return "edit-profile";
+    }
+
     @PatchMapping("/profile/edit-profile/{username}")
     public String editProfileConfirm(@PathVariable String username,
                                      @Valid UserProfileEditBindingModel userProfileEditBindingModel,
@@ -162,7 +168,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userProfileEditBindingModel", userProfileEditBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditBindingModel", bindingResult);
 
-            return "redirect:/users/profile/edit-profile/" + username;
+            return "redirect:/users/profile/edit-profile/errors/" + username;
         }
 
         UserProfileEditServiceModel userProfileEditServiceModel = this.modelMapper.map(userProfileEditBindingModel, UserProfileEditServiceModel.class);

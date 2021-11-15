@@ -3,28 +3,29 @@ package com.example.healthyfood.model.binding;
 import com.example.healthyfood.model.validator.UniqueUsername;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserRegisterBindingModel {
 
-    @NotNull
+    @NotBlank
     @Size(min = 4, max = 20, message = "Username length must be between 4 and 20 characters.")
     @UniqueUsername
     private String username;
-    @NotNull
+    @NotBlank
     @Size(min = 8, max = 30)
     private String password;
-    @NotNull
+    @NotBlank
     @Size(min = 8, max = 30)
     private String confirmPassword;
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 20)
     private String firstName;
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 20)
     private String lastName;
-    @NotNull
+    @NotBlank
     @Email
     private String email;
 

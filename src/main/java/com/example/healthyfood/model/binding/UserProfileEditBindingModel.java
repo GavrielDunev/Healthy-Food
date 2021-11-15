@@ -1,18 +1,18 @@
 package com.example.healthyfood.model.binding;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class UserProfileEditBindingModel {
 
-    @NotNull
+    @NotBlank
     @Size(min = 2, max = 20)
     private String firstName;
-    @NotNull
+    @NotBlank
     @Size(min = 3, max = 20)
     private String lastName;
-    @NotNull
+    @NotBlank
     @Email
     private String email;
 
