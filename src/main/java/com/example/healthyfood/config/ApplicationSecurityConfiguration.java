@@ -1,5 +1,6 @@
 package com.example.healthyfood.config;
 
+import com.example.healthyfood.model.entity.enums.UserRoleEnum;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,6 +28,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .antMatchers("/", "/about", "/meals/breakfast", "/meals/lunch",
                         "/meals/dinner", "/drinks", "/desserts").permitAll()
                 .antMatchers("/users/login", "/users/register").not().authenticated()
+                .antMatchers("/admin/add-role", "/admin/statistics").hasRole(UserRoleEnum.ADMIN.name())
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
