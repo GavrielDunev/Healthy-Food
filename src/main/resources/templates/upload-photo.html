@@ -15,7 +15,7 @@
     <div class="col-sm-8 col-md-5 col-lg-3 m-auto mt-3">
         <form th:object="${userUploadPhotoBindingModel}"
                 th:action="@{/users/profile/upload-photo/{username}(username = *{username})}"
-              th:method="post"
+              th:method="patch"
               enctype="multipart/form-data">
             <input type="file" class="form-control" id="floatingInputGrid" placeholder="Photo"
                    th:field="*{picture}"

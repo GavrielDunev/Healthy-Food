@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/commons :: head"></head>
 
@@ -14,20 +13,36 @@
     </section>
 
     <div class="col-sm-9 col-md-5 col-lg-3 m-auto">
-        <select class="form-select mb-4" aria-label="Default select example">
-            <option selected>Choose user</option>
-            <option value="">Username</option>
-        </select>
-        <select class="form-select decorated" aria-label="Default select example">
-            <option selected>Choose role</option>
-            <option value="">Admin</option>
-        </select>
-        <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
-            <button type="submit"
-                    class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
-                Add role
-            </button>
-        </div>
+        <form th:action="@{/admin/add-role}" th:method="patch" th:object="${adminAddRoleBindingModel}">
+            <select th:field="*{username}"
+                    th:errorclass="is-invalid" class="form-select mb-4" aria-label="Default select example">
+                <option value="" selected>Choose user</option>
+                <option th:each="u : ${usernames}"
+                        th:value="${u}"
+                        th:text="${u}">Username
+                </option>
+            </select>
+            <small class="invalid-feedback errors alert alert-danger">
+                Username is required.
+            </small>
+            <select th:field="*{userRole}"
+                    th:errorclass="is-invalid" class="form-select" aria-label="Default select example">
+                <option value="" selected>Choose role</option>
+                <option th:each="r : ${T(com.example.healthyfood.model.entity.enums.UserRoleEnum).values()}"
+                        th:value="${r}"
+                        th:text="${r}">Admin
+                </option>
+            </select>
+            <small class="invalid-feedback errors alert alert-danger">
+                Role is required.
+            </small>
+            <div class="col-sm-8 col-md-12 col-lg-6 mx-auto">
+                <button type="submit"
+                        class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">
+                    Add role
+                </button>
+            </div>
+        </form>
     </div>
 
 

@@ -1,10 +1,7 @@
 package com.example.healthyfood.service;
 
 import com.example.healthyfood.model.entity.UserEntity;
-import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
-import com.example.healthyfood.model.service.UserProfileEditServiceModel;
-import com.example.healthyfood.model.service.UserRegisterServiceModel;
-import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
+import com.example.healthyfood.model.service.*;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileEditViewModel;
 
@@ -33,4 +30,8 @@ public interface UserService {
     void changePassword(String username, UserChangePasswordServiceModel userChangePasswordServiceModel);
 
     boolean isCurrentUser(String currentUserUsername, String username);
+
+    List<String> getAllUserUsernamesWithoutCurrent(String currentUser);
+
+    void addRole(AdminAddRoleServiceModel addRoleServiceModel);
 }

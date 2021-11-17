@@ -129,7 +129,7 @@ public class UserController {
     }
 
     @PreAuthorize("@userServiceImpl.isCurrentUser(#principal.name, #username)")
-    @PostMapping("/profile/upload-photo/{username}")
+    @PatchMapping("/profile/upload-photo/{username}")
     public String uploadPhotoConfirm(@PathVariable String username,
                                      @Valid UserUploadPhotoBindingModel userUploadPhotoBindingModel,
                                      BindingResult bindingResult,

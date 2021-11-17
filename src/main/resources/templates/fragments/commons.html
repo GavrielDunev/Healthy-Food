@@ -71,7 +71,7 @@
                            aria-expanded="false">Admin
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Add role</a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/add-role}">Add role</a></li>
                         </ul>
                     </li>
                     <th:block sec:authorize="!isAuthenticated()">

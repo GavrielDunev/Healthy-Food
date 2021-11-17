@@ -4,10 +4,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
 import com.example.healthyfood.model.entity.enums.UserRoleEnum;
-import com.example.healthyfood.model.service.UserChangePasswordServiceModel;
-import com.example.healthyfood.model.service.UserProfileEditServiceModel;
-import com.example.healthyfood.model.service.UserRegisterServiceModel;
-import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
+import com.example.healthyfood.model.service.*;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.repository.UserRepository;
@@ -176,6 +173,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isCurrentUser(String currentUserUsername, String username) {
         return currentUserUsername.equals(username);
+    }
+
+    @Override
+    public List<String> getAllUserUsernamesWithoutCurrent(String currentUser) {
+
+        return this.userRepository.findAllUsernames()
+                .stream()
+                .filter(s -> !s.equals(currentUser))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addRole(AdminAddRoleServiceModel addRoleServiceModel) {
+
+        UserRoleEnum role = addRoleServiceModel.getUserRole();
+
+        UserEntity userEntity = findByUsername(addRoleServiceModel.getUsername());
+
+        UserRoleEntity adminRole = this.userRoleRepository.findByRole(UserRoleEnum.ADMIN);
+
+        if (role.name().equals("ADMIN")) {
+            userEntity.getRoles().add(adminRole);
+        } else if (role.name().equals("USER")) {
+            userEntity.getRoles()
+                    .removeIf(userRoleEntity -> userRoleEntity.getRole().name().equals("ADMIN"));
+        }
+
+        this.userRepository.save(userEntity);
     }
 
     private void deleteCurrentProfilePicture(UserEntity userEntity) {
