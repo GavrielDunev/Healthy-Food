@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/commons :: head"></head>
+
+<body>
+<header th:replace="fragments/commons :: navigation"></header>
+
+<main>
+    <section class="pt-5 pb-2 text-center container">
+        <h1 class="fw-light text-black">Statistics</h1>
+    </section>
+
+    <div class="container-fluid">
+        <h3 class="text-center mt-5">Total requests: <th:block th:text="${statistics.getTotalRequests()}"></th:block></h3>
+        <h3 class="text-center mt-5">Anonymous requests: <th:block th:text="${statistics.getAnonymousRequests()}"></th:block></h3>
+        <h3 class="text-center mt-5">Authenticated requests: <th:block th:text="${statistics.getAuthenticatedRequests()}"></th:block></h3>
+    </div>
+
+
+</main>
+
+<footer th:replace="fragments/commons :: footer"></footer>
+
+</body>
+
+</html>

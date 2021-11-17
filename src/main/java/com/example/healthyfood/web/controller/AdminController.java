@@ -2,6 +2,7 @@ package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.AdminAddRoleBindingModel;
 import com.example.healthyfood.model.service.AdminAddRoleServiceModel;
+import com.example.healthyfood.service.StatisticsService;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -11,21 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
+    private final StatisticsService statisticsService;
     private final ModelMapper modelMapper;
 
-    public AdminController(UserService userService, ModelMapper modelMapper) {
+    public AdminController(UserService userService, StatisticsService statisticsService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.statisticsService = statisticsService;
         this.modelMapper = modelMapper;
     }
 
@@ -59,5 +62,15 @@ public class AdminController {
     @ModelAttribute
     public AdminAddRoleBindingModel adminAddRoleBindingModel() {
         return new AdminAddRoleBindingModel();
+    }
+
+    @GetMapping("/statistics")
+    public ModelAndView statistics() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("statistics", this.statisticsService.getStatistics());
+        modelAndView.setViewName("statistics");
+
+        return modelAndView;
     }
 }
