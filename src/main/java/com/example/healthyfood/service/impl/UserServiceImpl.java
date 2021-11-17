@@ -5,6 +5,7 @@ import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.UserRoleEntity;
 import com.example.healthyfood.model.entity.enums.UserRoleEnum;
 import com.example.healthyfood.model.service.*;
+import com.example.healthyfood.model.view.AdminAddRoleViewModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.repository.UserRepository;
@@ -176,11 +177,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> getAllUserUsernamesWithoutCurrent(String currentUser) {
+    public List<AdminAddRoleViewModel> getAllUserUsernamesWithoutCurrent(String currentUser) {
 
         return this.userRepository.findAllUsernames()
                 .stream()
                 .filter(s -> !s.equals(currentUser))
+                .map(s -> new AdminAddRoleViewModel().setUsername(s))
                 .collect(Collectors.toList());
     }
 

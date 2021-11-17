@@ -2,6 +2,7 @@ package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.AdminAddRoleBindingModel;
 import com.example.healthyfood.model.service.AdminAddRoleServiceModel;
+import com.example.healthyfood.model.view.AdminAddRoleViewModel;
 import com.example.healthyfood.service.StatisticsService;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,7 +37,9 @@ public class AdminController {
     @GetMapping("/add-role")
     public String addRole(Model model, Principal principal) {
 
-        model.addAttribute("usernames", this.userService.getAllUserUsernamesWithoutCurrent(principal.getName()));
+        List<AdminAddRoleViewModel> usernames = this.userService.getAllUserUsernamesWithoutCurrent(principal.getName());
+
+        model.addAttribute("usernames", usernames);
 
         return "add-role";
     }

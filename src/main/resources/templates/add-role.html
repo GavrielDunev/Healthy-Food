@@ -15,18 +15,18 @@
     <div class="col-sm-9 col-md-5 col-lg-3 m-auto">
         <form th:action="@{/admin/add-role}" th:method="patch" th:object="${adminAddRoleBindingModel}">
             <select th:field="*{username}"
-                    th:errorclass="is-invalid" class="form-select mb-4" aria-label="Default select example">
+                    th:errorclass="is-invalid" class="form-select mb-4" aria-label="Default select example" required>
                 <option value="" selected>Choose user</option>
                 <option th:each="u : ${usernames}"
-                        th:value="${u}"
-                        th:text="${u}">Username
+                        th:value="${u.username}"
+                        th:text="${u.username}">Username
                 </option>
             </select>
             <small class="invalid-feedback errors alert alert-danger">
                 Username is required.
             </small>
             <select th:field="*{userRole}"
-                    th:errorclass="is-invalid" class="form-select" aria-label="Default select example">
+                    th:errorclass="is-invalid" class="form-select" aria-label="Default select example" required>
                 <option value="" selected>Choose role</option>
                 <option th:each="r : ${T(com.example.healthyfood.model.entity.enums.UserRoleEnum).values()}"
                         th:value="${r}"

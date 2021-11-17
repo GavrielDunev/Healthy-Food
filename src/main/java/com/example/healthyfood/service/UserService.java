@@ -2,6 +2,7 @@ package com.example.healthyfood.service;
 
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.service.*;
+import com.example.healthyfood.model.view.AdminAddRoleViewModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileEditViewModel;
 
@@ -31,7 +32,7 @@ public interface UserService {
 
     boolean isCurrentUser(String currentUserUsername, String username);
 
-    List<String> getAllUserUsernamesWithoutCurrent(String currentUser);
+    List<AdminAddRoleViewModel> getAllUserUsernamesWithoutCurrent(String currentUser);
 
     void addRole(AdminAddRoleServiceModel addRoleServiceModel);
 }
