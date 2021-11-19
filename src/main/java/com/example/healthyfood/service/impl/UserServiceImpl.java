@@ -114,12 +114,14 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = findByUsername(username);
 
+        PictureEntity currentProfilePicture = userEntity.getProfilePicture();
+
         PictureEntity newPicture = this.pictureService.createPicture(userUploadPhotoServiceModel.getPicture());
 
         userEntity.setProfilePicture(newPicture);
         this.userRepository.save(userEntity);
 
-        deleteCurrentProfilePicture(userEntity);
+        deleteCurrentProfilePicture(currentProfilePicture);
     }
 
     @Override
@@ -127,12 +129,14 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = findByUsername(username);
 
+        PictureEntity currentProfilePicture = userEntity.getProfilePicture();
+
         PictureEntity defaultProfilePicture = this.pictureService.findById(1L);
 
         userEntity.setProfilePicture(defaultProfilePicture);
         this.userRepository.save(userEntity);
 
-        deleteCurrentProfilePicture(userEntity);
+        deleteCurrentProfilePicture(currentProfilePicture);
     }
 
     @Override
@@ -205,9 +209,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(userEntity);
     }
 
-    private void deleteCurrentProfilePicture(UserEntity userEntity) {
-
-        PictureEntity currentProfilePicture = userEntity.getProfilePicture();
+    private void deleteCurrentProfilePicture(PictureEntity currentProfilePicture) {
 
         if (currentProfilePicture.getId() != 1) {
             this.cloudinaryService.delete(currentProfilePicture.getPublicId());
