@@ -13,7 +13,7 @@ import com.example.healthyfood.repository.UserRoleRepository;
 import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.PictureService;
 import com.example.healthyfood.service.UserService;
-import com.example.healthyfood.web.exception.ObjectNotFoundException;
+import com.example.healthyfood.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

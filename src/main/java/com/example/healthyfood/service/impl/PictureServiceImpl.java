@@ -4,7 +4,7 @@ import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.repository.PictureRepository;
 import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.PictureService;
-import com.example.healthyfood.web.exception.ObjectNotFoundException;
+import com.example.healthyfood.service.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

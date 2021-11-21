@@ -12,7 +12,7 @@ import com.example.healthyfood.repository.RecipeRepository;
 import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.service.UserService;
-import com.example.healthyfood.web.exception.ObjectNotFoundException;
+import com.example.healthyfood.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
