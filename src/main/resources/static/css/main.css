@@ -269,6 +269,35 @@ main {
     margin-left: 10px;
 }
 
+.body-error{
+    background-image: url(/images/error-background.jpg);
+    background-size: cover;
+    min-height: 0;
+}
+
+.h1-error{
+    margin: 40vh auto 0;
+    color: black;
+    font-size: 80px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.h2-error{
+    margin: 0 auto 0;
+    color: black;
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.h3-error{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .center {
     width: 90%;
@@ -312,4 +341,5 @@ main {
         width: 100%;
         padding-bottom: 20px;
     }
+
 }
