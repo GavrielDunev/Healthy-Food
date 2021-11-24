@@ -4,6 +4,7 @@ import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "recipes")
@@ -36,6 +37,8 @@ public class RecipeEntity extends BaseEntity {
     private DrinkEntity drink;
     @OneToOne(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private DessertEntity dessertEntity;
+    @OneToMany(mappedBy = "recipe")
+    private List<CommentEntity> comments;
 
     public String getTitle() {
         return title;
@@ -151,6 +154,15 @@ public class RecipeEntity extends BaseEntity {
 
     public RecipeEntity setDessertEntity(DessertEntity dessertEntity) {
         this.dessertEntity = dessertEntity;
+        return this;
+    }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public RecipeEntity setComments(List<CommentEntity> comments) {
+        this.comments = comments;
         return this;
     }
 }

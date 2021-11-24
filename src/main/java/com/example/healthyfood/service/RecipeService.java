@@ -1,5 +1,6 @@
 package com.example.healthyfood.service;
 
+import com.example.healthyfood.model.entity.RecipeEntity;
 import com.example.healthyfood.model.service.RecipeEditServiceModel;
 import com.example.healthyfood.model.view.RecipeDetailsViewModel;
 import com.example.healthyfood.model.view.RecipeEditViewModel;
@@ -19,4 +20,6 @@ public interface RecipeService {
     void deleteRecipe(Long id);
 
     boolean isOwner(Long id, String username);
+
+    RecipeEntity findById(Long recipeId);
 }

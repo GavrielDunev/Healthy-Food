@@ -46,8 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeDetailsViewModel getRecipeDetailsViewById(Long id, String username) {
 
-        RecipeEntity recipeEntity = this.recipeRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+        RecipeEntity recipeEntity = findById(id);
 
         RecipeDetailsViewModel recipeDetailsViewModel = this.modelMapper.map(recipeEntity, RecipeDetailsViewModel.class);
         recipeDetailsViewModel.setIsOwner(isOwner(id, username));
@@ -58,8 +57,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeEditViewModel getRecipeEditViewById(Long id) {
 
-        RecipeEntity recipe = this.recipeRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+        RecipeEntity recipe = findById(id);
 
         RecipeEditViewModel recipeEditViewModel = this.modelMapper.map(recipe, RecipeEditViewModel.class);
 
@@ -75,9 +73,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void editRecipe(RecipeEditServiceModel recipeEditServiceModel) {
 
-        RecipeEntity recipeEntity = this.recipeRepository.findById(recipeEditServiceModel.getId())
-                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id "
-                        + recipeEditServiceModel.getId() + " was not found!"));
+        RecipeEntity recipeEntity = findById(recipeEditServiceModel.getId());
 
 
         recipeEntity.setDescription(recipeEditServiceModel.getDescription())
@@ -98,8 +94,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteRecipe(Long id) {
 
-        RecipeEntity recipeEntity = this.recipeRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+        RecipeEntity recipeEntity = findById(id);
 
         if (this.cloudinaryService.delete(recipeEntity.getPicture().getPublicId())) {
 
@@ -110,12 +105,17 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public boolean isOwner(Long id, String username) {
 
-        RecipeEntity recipe = this.recipeRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + id + " was not found!"));
+        RecipeEntity recipe = findById(id);
 
         UserEntity user = this.userService.findByUsername(username);
 
         return isAdmin(user) || user.getUsername().equals(recipe.getAuthor().getUsername());
+    }
+
+    @Override
+    public RecipeEntity findById(Long recipeId) {
+        return this.recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ObjectNotFoundException("Recipe with id " + recipeId + " was not found!"));
     }
 
     private boolean isAdmin(UserEntity user) {
