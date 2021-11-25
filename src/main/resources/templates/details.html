@@ -80,16 +80,24 @@
         <section class="comments section-margin">
             <h4 class="fw-normal">Comments</h4>
 
+            <!-- All comments section -->
+            <div>
+                    <span id="commentCntr">
+                        <!-- Comments section, filled in by script -->
+                    </span>
+            </div>
+
             <div>
                 <!-- Comments submission -->
-                <form method="post" action="/">
+                <form th:method="post" th:action="@{/api/{recipeId}/comments(recipeId = ${recipe.id})}"
+                th:object="${commentAddBindingModel}">
                     <div class="form-group">
                         <h5 class="fw-normal">Leave a comment</h5>
                         <label for="message">Message</label>
                         <textarea name="message" id="message" cols="30" rows="5" class="form-control"
                                   style="background-color: white;"></textarea>
                         <small id="messageError" class="invalid-feedback">
-                            Message should be at least 10 characters.
+                            Message should be at least 5 characters.
                         </small>
                     </div>
 
@@ -104,16 +112,15 @@
                 <!-- Comments submission -->
             </div>
 
-            <!-- All comments section -->
-            <div>
-                    <span id="commentCtnr">
-                        <!-- Comments section, filled in by script -->
-                    </span>
-            </div>
         </section>
-    </div>
-</main>
 
+    </div>
+
+    <input type="hidden" name="recipeId" id="recipeId" th:value="${recipe.id}">
+
+    <script th:src="@{/js/comments.js}"></script>
+
+</main>
 
 <footer th:replace="fragments/commons :: footer"></footer>
 

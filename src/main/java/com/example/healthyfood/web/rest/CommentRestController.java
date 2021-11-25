@@ -1,8 +1,8 @@
 package com.example.healthyfood.web.rest;
 
-import com.example.healthyfood.model.binding.CommentBindingModel;
-import com.example.healthyfood.model.service.CommentServiceModel;
-import com.example.healthyfood.model.validator.ApiError;
+import com.example.healthyfood.model.binding.CommentAddBindingModel;
+import com.example.healthyfood.model.service.CommentAddServiceModel;
+import com.example.healthyfood.model.validation.ApiError;
 import com.example.healthyfood.model.view.CommentViewModel;
 import com.example.healthyfood.service.CommentService;
 import org.modelmapper.ModelMapper;
@@ -17,7 +17,6 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class CommentRestController {
 
     private final CommentService commentService;
@@ -28,20 +27,21 @@ public class CommentRestController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/{recipeId}/comments")
+    @GetMapping("/api/{recipeId}/comments")
     public ResponseEntity<List<CommentViewModel>> getComments(@PathVariable Long recipeId,
                                                               Principal principal) {
 
         return ResponseEntity.ok(this.commentService.getComments(recipeId, principal.getName()));
     }
 
-    @PostMapping("/{recipeId}/comments")
+    @PostMapping("/api/{recipeId}/comments")
     public ResponseEntity<CommentViewModel> newComment(@PathVariable Long recipeId,
                                                        Principal principal,
-                                                       @RequestBody @Valid CommentBindingModel commentBindingModel) {
+                                                       @RequestBody @Valid CommentAddBindingModel commentAddBindingModel) {
 
-        CommentServiceModel commentServiceModel = this.modelMapper.map(commentBindingModel, CommentServiceModel.class);
-        commentServiceModel.setRecipeId(recipeId);
+        CommentAddServiceModel commentServiceModel = this.modelMapper.map(commentAddBindingModel, CommentAddServiceModel.class);
+        commentServiceModel.setRecipeId(recipeId)
+                .setAuthor(principal.getName());
 
         CommentViewModel newComment = this.commentService.addComment(commentServiceModel);
 

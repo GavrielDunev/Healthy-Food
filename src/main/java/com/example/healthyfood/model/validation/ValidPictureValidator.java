@@ -1,4 +1,4 @@
-package com.example.healthyfood.model.validator;
+package com.example.healthyfood.model.validation;
 
 import org.springframework.web.multipart.MultipartFile;
 

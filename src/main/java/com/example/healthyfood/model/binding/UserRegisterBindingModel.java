@@ -1,10 +1,9 @@
 package com.example.healthyfood.model.binding;
 
-import com.example.healthyfood.model.validator.UniqueUsername;
+import com.example.healthyfood.model.validation.UniqueUsername;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserRegisterBindingModel {

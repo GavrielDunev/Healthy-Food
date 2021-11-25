@@ -1,4 +1,4 @@
-package com.example.healthyfood.model.validator;
+package com.example.healthyfood.model.validation;
 
 import com.example.healthyfood.service.UserService;
 

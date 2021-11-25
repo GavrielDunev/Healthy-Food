@@ -1,4 +1,4 @@
-package com.example.healthyfood.model.validator;
+package com.example.healthyfood.model.validation;
 
 import org.springframework.http.HttpStatus;
 
@@ -30,6 +30,7 @@ public class ApiError {
     }
 
     public void addFieldWithError(String error) {
-
+        this.fieldsWithErrors.add(error);
     }
+
 }

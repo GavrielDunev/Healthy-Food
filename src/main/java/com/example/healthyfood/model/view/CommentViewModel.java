@@ -1,6 +1,7 @@
 package com.example.healthyfood.model.view;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CommentViewModel {
 
@@ -8,7 +9,7 @@ public class CommentViewModel {
     private String text;
     private String author;
     private String authorProfilePictureUrl;
-    private LocalDateTime created;
+    private String created;
     private boolean canDelete;
 
     public Long getId() {
@@ -38,12 +39,12 @@ public class CommentViewModel {
         return this;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
     public CommentViewModel setCreated(LocalDateTime created) {
-        this.created = created;
+        this.created = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy").format(created);
         return this;
     }
 

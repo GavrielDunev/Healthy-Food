@@ -1,6 +1,6 @@
 package com.example.healthyfood.model.service;
 
-public class CommentServiceModel {
+public class CommentAddServiceModel {
 
     private Long recipeId;
     private String text;
@@ -10,7 +10,7 @@ public class CommentServiceModel {
         return recipeId;
     }
 
-    public CommentServiceModel setRecipeId(Long recipeId) {
+    public CommentAddServiceModel setRecipeId(Long recipeId) {
         this.recipeId = recipeId;
         return this;
     }
@@ -19,7 +19,7 @@ public class CommentServiceModel {
         return text;
     }
 
-    public CommentServiceModel setText(String text) {
+    public CommentAddServiceModel setText(String text) {
         this.text = text;
         return this;
     }
@@ -28,7 +28,7 @@ public class CommentServiceModel {
         return author;
     }
 
-    public CommentServiceModel setAuthor(String author) {
+    public CommentAddServiceModel setAuthor(String author) {
         this.author = author;
         return this;
     }

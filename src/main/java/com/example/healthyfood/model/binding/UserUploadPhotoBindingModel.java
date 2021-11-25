@@ -1,6 +1,6 @@
 package com.example.healthyfood.model.binding;
 
-import com.example.healthyfood.model.validator.ValidPicture;
+import com.example.healthyfood.model.validation.ValidPicture;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UserUploadPhotoBindingModel {

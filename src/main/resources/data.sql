@@ -22,7 +22,7 @@ VALUES (2, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636201147/health
         'healthy-porridge-bowl-103f858_pwbecs');
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
-VALUES (1, 5, '2011-11-05 13:09',
+VALUES (1, 5, '2021-11-05 13:09',
         'Start your day right with this filling bowl of oats, berries, banana and seeds. It''s healthy and packed with nutrients to fuel body and mind.',
         'EASY',
         2,
@@ -43,6 +43,8 @@ VALUES (1, 5, '2011-11-05 13:09',
         10, 1);
 INSERT INTO meals(id, category, recipe_id)
 VALUES (1, 'BREAKFAST', 1);
+INSERT INTO comments(id, created, text, author_id, recipe_id)
+VALUES (1, '2021-11-25 12:02', 'Fast to make and very delicious!', 1, 1);
 
 
 INSERT INTO pictures(id, url, public_id)

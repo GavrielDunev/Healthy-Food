@@ -37,7 +37,7 @@ public class RecipeEntity extends BaseEntity {
     private DrinkEntity drink;
     @OneToOne(mappedBy = "recipe", cascade = CascadeType.REMOVE)
     private DessertEntity dessertEntity;
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 
     public String getTitle() {

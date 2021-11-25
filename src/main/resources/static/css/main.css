@@ -198,8 +198,6 @@ main {
     padding: 10px;
 }
 
-
-
 .form{
     margin: 0 auto;
 }
@@ -292,10 +290,29 @@ main {
 }
 
 .h3-error{
+    margin: 15px auto 0;
     color: black;
     font-size: 30px;
     text-align: center;
     font-weight: bold;
+}
+
+.user-info-container img {
+    width: 45px;
+    height: 45px;
+}
+
+.user-comment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    word-break: break-all;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 @media (max-width: 768px) {

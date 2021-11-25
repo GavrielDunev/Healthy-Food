@@ -1,4 +1,4 @@
-package com.example.healthyfood.model.validator;
+package com.example.healthyfood.model.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueUsernameValidator.class)
-public @interface UniqueUsername {
+@Constraint(validatedBy = ValidPictureValidator.class)
+public @interface ValidPicture {
 
-    String message() default "Username is busy!";
+    String message() default "Picture file with one of the following types is required! (.jpg, .jpeg, .png)";
 
     Class<?>[] groups() default { };
 
