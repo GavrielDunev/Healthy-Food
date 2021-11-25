@@ -1,4 +1,4 @@
-package com.example.healthyfood.web.rest;
+package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.CommentAddBindingModel;
 import com.example.healthyfood.model.service.CommentAddServiceModel;

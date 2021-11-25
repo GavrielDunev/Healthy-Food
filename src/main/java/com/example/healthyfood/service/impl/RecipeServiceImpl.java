@@ -13,7 +13,9 @@ import com.example.healthyfood.service.CloudinaryService;
 import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.service.UserService;
 import com.example.healthyfood.service.exception.ObjectNotFoundException;
+import com.example.healthyfood.service.scheduler.CacheCleaner;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,15 +27,18 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepository;
     private final CloudinaryService cloudinaryService;
     private final UserService userService;
+    private final CacheCleaner cacheCleaner;
     private final ModelMapper modelMapper;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, CloudinaryService cloudinaryService, UserService userService, ModelMapper modelMapper) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, CloudinaryService cloudinaryService, UserService userService, CacheCleaner cacheCleaner, ModelMapper modelMapper) {
         this.recipeRepository = recipeRepository;
         this.cloudinaryService = cloudinaryService;
         this.userService = userService;
+        this.cacheCleaner = cacheCleaner;
         this.modelMapper = modelMapper;
     }
 
+    @Cacheable("latestRecipes")
     @Override
     public List<RecipeSummaryViewModel> getLastSixRecipeViews() {
 
@@ -97,9 +102,10 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeEntity recipeEntity = findById(id);
 
         if (this.cloudinaryService.delete(recipeEntity.getPicture().getPublicId())) {
-
             this.recipeRepository.delete(recipeEntity);
         }
+
+        this.cacheCleaner.removeCachedRecipes();
     }
 
     @Override
