@@ -1,2 +1,2 @@
 # Healthy-Food
-Java Wep Application about healthy food and drinks
+Java Web Application about healthy food, drinks and desserts.
