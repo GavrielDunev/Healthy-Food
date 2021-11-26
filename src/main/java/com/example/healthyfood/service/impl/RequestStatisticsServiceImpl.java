@@ -1,14 +1,14 @@
 package com.example.healthyfood.service.impl;
 
-import com.example.healthyfood.model.view.StatisticsViewModel;
-import com.example.healthyfood.service.StatisticsService;
+import com.example.healthyfood.model.view.RequestStatisticsViewModel;
+import com.example.healthyfood.service.RequestStatisticsService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StatisticsServiceImpl implements StatisticsService {
+public class RequestStatisticsServiceImpl implements RequestStatisticsService {
 
     private int authenticatedRequests, anonymousRequests;
 
@@ -27,7 +27,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public StatisticsViewModel getStatistics() {
-        return new StatisticsViewModel(authenticatedRequests, anonymousRequests);
+    public RequestStatisticsViewModel getStatistics() {
+        return new RequestStatisticsViewModel(authenticatedRequests, anonymousRequests);
     }
 }

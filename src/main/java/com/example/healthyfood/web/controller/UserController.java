@@ -12,6 +12,7 @@ import com.example.healthyfood.model.service.UserUploadPhotoServiceModel;
 import com.example.healthyfood.model.view.RecipeSummaryViewModel;
 import com.example.healthyfood.model.view.UserProfileEditViewModel;
 import com.example.healthyfood.model.view.UserProfileViewModel;
+import com.example.healthyfood.service.CurrentUserProfileViewsService;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,10 +34,12 @@ public class UserController {
 
     private final ModelMapper modelMapper;
     private final UserService userService;
+    private final CurrentUserProfileViewsService currentUserProfileViewsService;
 
-    public UserController(ModelMapper modelMapper, UserService userService) {
+    public UserController(ModelMapper modelMapper, UserService userService, CurrentUserProfileViewsService currentUserProfileViewsService) {
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.currentUserProfileViewsService = currentUserProfileViewsService;
     }
 
     @GetMapping("/register")
@@ -98,8 +101,14 @@ public class UserController {
         UserEntity currentUser = this.userService.findByUsername(username);
         UserProfileViewModel userProfileViewModel = this.modelMapper.map(currentUser, UserProfileViewModel.class);
 
+        boolean isCurrentUser = principal.getName().equals(username);
+
         model.addAttribute("user", userProfileViewModel);
-        model.addAttribute("isCurrentUser", principal.getName().equals(username));
+        model.addAttribute("isCurrentUser", isCurrentUser);
+
+        if (isCurrentUser) {
+            model.addAttribute("views", this.currentUserProfileViewsService.getViews());
+        }
 
         return "profile";
     }

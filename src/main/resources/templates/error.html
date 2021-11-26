@@ -9,7 +9,7 @@
 
 <body class="body-error">
 
-<h1 class="h1-error" th:text="${error}">Message</h1>
+<h1 class="h1-error" th:text="${message} == 'No message available' ? ${error} : ${message}">Message</h1>
 <h2 class="h2-error" th:text="|Status code: ${status}|">Status</h2>
 <h3 class="h3-error"><a href="/">Go to home page</a></h3>
 

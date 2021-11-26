@@ -1,11 +1,11 @@
 package com.example.healthyfood.model.view;
 
-public class StatisticsViewModel {
+public class RequestStatisticsViewModel {
 
     private final int authenticatedRequests;
     private final int anonymousRequests;
 
-    public StatisticsViewModel(int authenticatedRequests, int anonymousRequests) {
+    public RequestStatisticsViewModel(int authenticatedRequests, int anonymousRequests) {
         this.authenticatedRequests = authenticatedRequests;
         this.anonymousRequests = anonymousRequests;
     }

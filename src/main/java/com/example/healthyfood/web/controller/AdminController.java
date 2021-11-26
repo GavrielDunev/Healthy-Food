@@ -3,7 +3,7 @@ package com.example.healthyfood.web.controller;
 import com.example.healthyfood.model.binding.AdminAddRoleBindingModel;
 import com.example.healthyfood.model.service.AdminAddRoleServiceModel;
 import com.example.healthyfood.model.view.AdminAddRoleViewModel;
-import com.example.healthyfood.service.StatisticsService;
+import com.example.healthyfood.service.RequestStatisticsService;
 import com.example.healthyfood.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -25,12 +25,12 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
-    private final StatisticsService statisticsService;
+    private final RequestStatisticsService requestStatisticsService;
     private final ModelMapper modelMapper;
 
-    public AdminController(UserService userService, StatisticsService statisticsService, ModelMapper modelMapper) {
+    public AdminController(UserService userService, RequestStatisticsService requestStatisticsService, ModelMapper modelMapper) {
         this.userService = userService;
-        this.statisticsService = statisticsService;
+        this.requestStatisticsService = requestStatisticsService;
         this.modelMapper = modelMapper;
     }
 
@@ -72,7 +72,7 @@ public class AdminController {
     public ModelAndView statistics() {
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("statistics", this.statisticsService.getStatistics());
+        modelAndView.addObject("statistics", this.requestStatisticsService.getStatistics());
         modelAndView.setViewName("statistics");
 
         return modelAndView;
