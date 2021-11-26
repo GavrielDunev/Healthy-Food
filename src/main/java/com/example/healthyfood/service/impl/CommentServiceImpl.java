@@ -9,7 +9,6 @@ import com.example.healthyfood.repository.CommentRepository;
 import com.example.healthyfood.service.CommentService;
 import com.example.healthyfood.service.RecipeService;
 import com.example.healthyfood.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

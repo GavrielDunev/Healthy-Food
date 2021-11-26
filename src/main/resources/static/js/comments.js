@@ -6,8 +6,7 @@ const allComments = [];
 
 const displayComments = (comments) => {
 
-    commentsContainer.innerHTML = comments.map(
-        (comment) => {
+    commentsContainer.innerHTML = comments.map(comment => {
             return asComment(comment)
         }
     ).join('')

@@ -268,15 +268,15 @@ main {
 }
 
 .body-error{
-    background-image: url(/images/error-background.jpg);
-    background-size: cover;
+    background-image: url(/images/error.png);
+    background-size: 1350px;
     min-height: 0;
 }
 
 .h1-error{
-    margin: 40vh auto 0;
+    margin: 30vh auto 0;
     color: black;
-    font-size: 80px;
+    font-size: 60px;
     text-align: center;
     font-weight: bold;
 }
