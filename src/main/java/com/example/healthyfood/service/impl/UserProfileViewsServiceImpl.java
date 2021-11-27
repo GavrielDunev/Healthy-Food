@@ -26,8 +26,8 @@ public class UserProfileViewsServiceImpl implements UserProfileViewsService {
 
             String currentUser = requestedUrl.substring(requestedUrl.lastIndexOf("/") + 1);
 
-            if (!users.containsKey(currentUser)) {
-                users.put(currentUser, 1);
+            if (!this.users.containsKey(currentUser)) {
+                this.users.put(currentUser, 1);
             } else {
                 this.users.put(currentUser, this.users.get(currentUser) + 1);
             }
