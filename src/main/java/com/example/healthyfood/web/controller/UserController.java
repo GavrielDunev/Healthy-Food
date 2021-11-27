@@ -101,14 +101,9 @@ public class UserController {
         UserEntity currentUser = this.userService.findByUsername(username);
         UserProfileViewModel userProfileViewModel = this.modelMapper.map(currentUser, UserProfileViewModel.class);
 
-        boolean isCurrentUser = principal.getName().equals(username);
-
         model.addAttribute("user", userProfileViewModel);
-        model.addAttribute("isCurrentUser", isCurrentUser);
-
-        if (isCurrentUser) {
-            model.addAttribute("views", this.currentUserProfileViewsService.getViews());
-        }
+        model.addAttribute("isCurrentUser", principal.getName().equals(username));
+        model.addAttribute("views", this.currentUserProfileViewsService.getViews());
 
         return "profile";
     }
