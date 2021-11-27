@@ -1,6 +1,9 @@
 package com.example.healthyfood.service.impl;
 
 import com.example.healthyfood.service.CurrentUserProfileViewsService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +21,9 @@ public class CurrentUserProfileViewsServiceImpl implements CurrentUserProfileVie
 
         String requestedUrl = httpServletRequest.getRequestURL().toString();
 
-        Principal principal = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (requestedUrl.contains("/users/profile/" + principal.getName())) {
+        if (requestedUrl.contains("/users/profile/")) {
             views++;
         }
     }
