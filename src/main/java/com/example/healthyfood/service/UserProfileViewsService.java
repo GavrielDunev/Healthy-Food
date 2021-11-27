@@ -2,7 +2,7 @@ package com.example.healthyfood.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface CurrentUserProfileViewsService {
+public interface UserProfileViewsService {
 
     void onRequest(HttpServletRequest httpServletRequest);
 
