@@ -6,5 +6,5 @@ public interface CurrentUserProfileViewsService {
 
     void onRequest(HttpServletRequest httpServletRequest);
 
-    int getViews();
+    int getViewsByAdmins();
 }

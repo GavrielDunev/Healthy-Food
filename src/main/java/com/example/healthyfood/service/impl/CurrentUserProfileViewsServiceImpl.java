@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class CurrentUserProfileViewsServiceImpl implements CurrentUserProfileViewsService {
 
-    private int views;
+    private int viewsByAdmins;
 
     @Override
     public void onRequest(HttpServletRequest httpServletRequest) {
@@ -21,13 +21,13 @@ public class CurrentUserProfileViewsServiceImpl implements CurrentUserProfileVie
 
         if (requestedUrl.contains("/users/profile/")
         && authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            views++;
+            viewsByAdmins++;
         }
     }
 
     @Override
-    public int getViews() {
-        return this.views;
+    public int getViewsByAdmins() {
+        return this.viewsByAdmins;
     }
 
 }
