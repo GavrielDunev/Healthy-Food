@@ -103,7 +103,7 @@ public class UserController {
 
         model.addAttribute("user", userProfileViewModel);
         model.addAttribute("isCurrentUser", principal.getName().equals(username));
-        model.addAttribute("views", this.currentUserProfileViewsService.getViewsByAdmins());
+        model.addAttribute("views", this.currentUserProfileViewsService.getViews(principal.getName()));
 
         return "profile";
     }

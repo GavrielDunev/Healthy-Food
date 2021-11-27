@@ -23,7 +23,7 @@
                                  class="rounded-circle" width="150">
                             <div>
                                 <th:block th:if="${isCurrentUser}">
-                                    <small id="views" th:text="|Views by admins: ${views}|"></small>
+                                    <small id="views" th:text="|Views: ${views}|"></small>
                                     <a th:href="@{/users/profile/upload-photo/{username}(username = *{username})}"
                                        class="form-button mt-3 btn btn-dark d-flex justify-content-center align-items-center">Upload
                                         photo</a>

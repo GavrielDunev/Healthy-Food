@@ -1,33 +1,45 @@
 package com.example.healthyfood.service.impl;
 
 import com.example.healthyfood.service.CurrentUserProfileViewsService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CurrentUserProfileViewsServiceImpl implements CurrentUserProfileViewsService {
 
-    private int viewsByAdmins;
+    private final Map<String, Integer> users = new HashMap<>();
+    private static final String[] PATHS = new String[]{"upload-photo", "recipes", "edit-profile", "change-password"};
 
     @Override
     public void onRequest(HttpServletRequest httpServletRequest) {
 
         String requestedUrl = httpServletRequest.getRequestURL().toString();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (requestedUrl.contains("/users/profile/")
-        && authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            viewsByAdmins++;
+                && !requestedUrl.contains(PATHS[0])
+                && !requestedUrl.contains(PATHS[1])
+                && !requestedUrl.contains(PATHS[2])
+                && !requestedUrl.contains(PATHS[3])) {
+
+            String currentUser = requestedUrl.substring(requestedUrl.lastIndexOf("/") + 1);
+
+            if (!users.containsKey(currentUser)) {
+                users.put(currentUser, 1);
+            } else {
+                this.users.put(currentUser, this.users.get(currentUser) + 1);
+            }
+
         }
+
     }
 
     @Override
-    public int getViewsByAdmins() {
-        return this.viewsByAdmins;
+    public int getViews(String username) {
+
+        return this.users.get(username);
     }
 
 }
