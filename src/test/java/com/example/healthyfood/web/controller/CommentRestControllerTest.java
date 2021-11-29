@@ -2,9 +2,11 @@ package com.example.healthyfood.web.controller;
 
 import com.example.healthyfood.model.binding.CommentAddBindingModel;
 import com.example.healthyfood.model.entity.CommentEntity;
+import com.example.healthyfood.model.entity.PictureEntity;
 import com.example.healthyfood.model.entity.RecipeEntity;
 import com.example.healthyfood.model.entity.UserEntity;
 import com.example.healthyfood.model.entity.enums.RecipeDifficultyEnum;
+import com.example.healthyfood.repository.PictureRepository;
 import com.example.healthyfood.repository.RecipeRepository;
 import com.example.healthyfood.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -26,6 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@WithMockUser("testUser")
 @SpringBootTest
 @AutoConfigureMockMvc
 class CommentRestControllerTest {
@@ -45,16 +49,27 @@ class CommentRestControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private PictureRepository pictureRepository;
+
     private UserEntity testUser;
 
     @BeforeEach
     public void setUp() {
+
+        PictureEntity picture = new PictureEntity()
+                .setPublicId("35125251")
+                .setUrl("testUrl");
+
+        this.pictureRepository.save(picture);
+
         testUser = new UserEntity()
                 .setUsername("testUser")
                 .setFirstName("First")
                 .setLastName("Last")
                 .setEmail("mail")
-                .setPassword("password");
+                .setPassword("password")
+                .setProfilePicture(picture);
 
         testUser = this.userRepository.save(testUser);
     }
@@ -74,7 +89,7 @@ class CommentRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$.[0].text", is(COMMENT_1)))
-                .andExpect(jsonPath("$.[0].text", is(COMMENT_2)));
+                .andExpect(jsonPath("$.[1].text", is(COMMENT_2)));
     }
 
     @Test
