@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +70,7 @@ class UserControllerTest {
 
     @AfterEach
     public void tearDown() {
+
         this.userRepository.deleteAll();
     }
 
@@ -108,5 +110,14 @@ class UserControllerTest {
         assertEquals(newUser.getFirstName(), "First");
         assertEquals(newUser.getLastName(), "Last");
         assertEquals(newUser.getEmail(), "testUser@gmail.com");
+    }
+
+    @Transactional
+    @Test
+    public void testGetLoginPage() throws Exception {
+
+        this.mockMvc.perform(get("/users/login"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("login"));
     }
 }
