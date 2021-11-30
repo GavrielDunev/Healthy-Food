@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 class HealthyFoodUserServiceImplTest {
 
     private UserEntity testUser;
-    private UserRoleEntity adminRole, userRole;
 
     private HealthyFoodUserServiceImpl testService;
 
@@ -36,10 +35,10 @@ class HealthyFoodUserServiceImplTest {
 
         this.testService = new HealthyFoodUserServiceImpl(this.mockedUserRepository);
 
-        this.adminRole = new UserRoleEntity()
+        UserRoleEntity adminRole = new UserRoleEntity()
                 .setRole(UserRoleEnum.ADMIN);
 
-        this.userRole = new UserRoleEntity()
+        UserRoleEntity userRole = new UserRoleEntity()
                 .setRole(UserRoleEnum.USER);
 
         this.testUser = new UserEntity()
@@ -48,7 +47,7 @@ class HealthyFoodUserServiceImplTest {
                 .setLastName("Last")
                 .setEmail("mail")
                 .setPassword("password")
-                .setRoles(Set.of(this.adminRole, this.userRole));
+                .setRoles(Set.of(adminRole, userRole));
     }
 
     @Test

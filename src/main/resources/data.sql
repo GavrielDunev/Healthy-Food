@@ -258,8 +258,8 @@ VALUES (2, 8);
 
 
 INSERT INTO pictures(id, url, public_id)
-VALUES (10, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636225152/recipe-image-legacy-id-1029452_10-563fda8_bqwort.webp',
-        'recipe-image-legacy-id-1029452_10-563fda8_bqwort');
+VALUES (10, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1638267422/recipe-image-legacy-id-1029452_10-563fda8_ph9rw9.webp',
+        'recipe-image-legacy-id-1029452_10-563fda8_ph9rw9');
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (9, 0, '2021-11-06 20:53',
@@ -275,8 +275,8 @@ INSERT INTO desserts(id, recipe_id)
 VALUES (1, 9);
 
 INSERT INTO pictures(id, url, public_id)
-VALUES (11, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636719256/Peanut-Butter-Oatmeal-Bars-013_shyx5j.jpg',
-        'Peanut-Butter-Oatmeal-Bars-013_shyx5j');
+VALUES (11, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1638267429/Peanut-Butter-Oatmeal-Bars-013_mztmv2.jpg',
+        'Peanut-Butter-Oatmeal-Bars-013_mztmv2');
 INSERT INTO recipes(id, cook_time, created, description, difficulty, picture_id, ingredients, instructions, title,
                     prep_time, author_id)
 VALUES (10, 0, '2021-11-06 21:07',
