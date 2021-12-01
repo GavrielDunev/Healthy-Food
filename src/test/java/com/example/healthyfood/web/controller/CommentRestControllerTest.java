@@ -88,8 +88,8 @@ class CommentRestControllerTest {
         mockMvc.perform(get("/api/" + recipe.getId() + "/comments"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$.[0].text", is(COMMENT_1)))
-                .andExpect(jsonPath("$.[1].text", is(COMMENT_2)));
+                .andExpect(jsonPath("$.[0].message", is(COMMENT_1)))
+                .andExpect(jsonPath("$.[1].message", is(COMMENT_2)));
     }
 
     @Test
@@ -109,7 +109,7 @@ class CommentRestControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(header().string("Location", matchesPattern("/api/" + emptyRecipe.getId() + "/comments/\\d")))
-                .andExpect(jsonPath("$.text").value(is(COMMENT_1)));
+                .andExpect(jsonPath("$.message").value(is(COMMENT_1)));
 
     }
 
