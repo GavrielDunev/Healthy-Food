@@ -29,7 +29,7 @@ async function submitComment(event) {
     try {
         const responseData = await postFormDataAsJson({url, formData});
 
-        commentsContainer.insertAdjacentHTML("afterbegin", asComment(responseData));
+        commentsContainer.insertAdjacentHTML("beforeend", asComment(responseData));
 
         form.reset();
     } catch (error) {
