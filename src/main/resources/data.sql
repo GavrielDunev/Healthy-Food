@@ -43,7 +43,7 @@ VALUES (1, 5, '2021-11-05 13:09',
         10, 1);
 INSERT INTO meals(id, category, recipe_id)
 VALUES (1, 'BREAKFAST', 1);
-INSERT INTO comments(id, created, text, author_id, recipe_id)
+INSERT INTO comments(id, created, message, author_id, recipe_id)
 VALUES (1, '2021-11-25 12:02', 'Fast to make and very delicious!', 1, 1);
 
 

@@ -7,14 +7,14 @@ public class CommentAddBindingModel {
 
     @NotBlank
     @Size(min = 5)
-    private String text;
+    private String message;
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public CommentAddBindingModel setText(String text) {
-        this.text = text;
+    public CommentAddBindingModel setMessage(String message) {
+        this.message = message;
         return this;
     }
 }

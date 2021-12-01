@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class CommentViewModel {
 
     private Long id;
-    private String text;
+    private String message;
     private String author;
     private String authorProfilePictureUrl;
     private String created;
@@ -21,12 +21,12 @@ public class CommentViewModel {
         return this;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public CommentViewModel setText(String text) {
-        this.text = text;
+    public CommentViewModel setMessage(String message) {
+        this.message = message;
         return this;
     }
 

@@ -96,7 +96,7 @@ class CommentRestControllerTest {
     public void testCreateComment() throws Exception {
 
         CommentAddBindingModel testComment = new CommentAddBindingModel()
-                .setText(COMMENT_1);
+                .setMessage(COMMENT_1);
 
         var emptyRecipe = initRecipe();
 
@@ -131,13 +131,13 @@ class CommentRestControllerTest {
     private RecipeEntity initComments(RecipeEntity recipe) {
 
         CommentEntity comment1 = new CommentEntity()
-                .setText(COMMENT_1)
+                .setMessage(COMMENT_1)
                 .setCreated(LocalDateTime.now())
                 .setAuthor(this.testUser)
                 .setRecipe(recipe);
 
         CommentEntity comment2 = new CommentEntity()
-                .setText(COMMENT_2)
+                .setMessage(COMMENT_2)
                 .setCreated(LocalDateTime.now())
                 .setAuthor(this.testUser)
                 .setRecipe(recipe);

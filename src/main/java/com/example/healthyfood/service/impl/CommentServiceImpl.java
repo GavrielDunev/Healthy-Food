@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService {
         CommentEntity commentEntity = new CommentEntity()
                 .setAuthor(author)
                 .setRecipe(recipe)
-                .setText(commentServiceModel.getText())
+                .setMessage(commentServiceModel.getMessage())
                 .setCreated(LocalDateTime.now());
 
         CommentEntity savedComment = this.commentRepository.save(commentEntity);
@@ -66,7 +66,7 @@ public class CommentServiceImpl implements CommentService {
         commentViewModel.setId(comment.getId())
                 .setAuthor(comment.getAuthor().getUsername())
                 .setCreated(comment.getCreated())
-                .setText(comment.getText())
+                .setMessage(comment.getMessage())
                 .setCanDelete(comment.getAuthor().getUsername().equals(username))
                 .setAuthorProfilePictureUrl(comment.getAuthor().getProfilePicture().getUrl());
 

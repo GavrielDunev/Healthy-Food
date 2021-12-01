@@ -45,7 +45,7 @@ public class CommentRestController {
 
         CommentViewModel newComment = this.commentService.addComment(commentServiceModel);
 
-        URI locationOfNewComment = URI.create(String.format("/api/%d/comments/%s", recipeId, newComment.getId()));
+        URI locationOfNewComment = URI.create(String.format("/api/%s/comments/%s", recipeId, newComment.getId()));
 
         return ResponseEntity.created(locationOfNewComment)
                 .body(newComment);

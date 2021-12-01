@@ -89,14 +89,14 @@
 
             <div>
                 <!-- Comments submission -->
-                <form th:method="post" th:action="@{/api/{recipeId}/comments(recipeId = ${recipe.id})}"
-                th:object="${commentAddBindingModel}">
+                <form id="commentForm" th:method="post"
+                      th:action="@{/api/{recipeId}/comments(recipeId = ${recipe.id})}">
                     <div class="form-group">
                         <h5 class="fw-normal">Leave a comment</h5>
                         <label for="message">Message</label>
                         <textarea name="message" id="message" cols="30" rows="5" class="form-control"
                                   style="background-color: white;"></textarea>
-                        <small id="messageError" class="invalid-feedback">
+                        <small id="messageError" class="invalid-feedback errors alert alert-danger">
                             Message should be at least 5 characters.
                         </small>
                     </div>

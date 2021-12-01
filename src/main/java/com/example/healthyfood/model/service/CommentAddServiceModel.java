@@ -3,7 +3,7 @@ package com.example.healthyfood.model.service;
 public class CommentAddServiceModel {
 
     private Long recipeId;
-    private String text;
+    private String message;
     private String author;
 
     public Long getRecipeId() {
@@ -15,12 +15,12 @@ public class CommentAddServiceModel {
         return this;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return message;
     }
 
-    public CommentAddServiceModel setText(String text) {
-        this.text = text;
+    public CommentAddServiceModel setMessage(String message) {
+        this.message = message;
         return this;
     }
 
