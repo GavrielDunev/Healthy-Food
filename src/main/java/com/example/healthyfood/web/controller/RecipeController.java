@@ -46,7 +46,7 @@ public class RecipeController {
 
         RecipeEditViewModel recipeEditView = this.recipeService.getRecipeEditViewById(id);
         RecipeEditBindingModel recipeEditBindingModel = this.modelMapper.map(recipeEditView, RecipeEditBindingModel.class)
-                .setIsMeal(recipeEditView.IsMeal());
+                .setIsMeal(recipeEditView.getIsMeal());
 
         model.addAttribute("recipeEditBindingModel", recipeEditBindingModel);
 

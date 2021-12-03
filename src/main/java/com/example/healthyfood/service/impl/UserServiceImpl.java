@@ -149,6 +149,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editUserProfile(String username, UserProfileEditServiceModel userProfileEditServiceModel) {
+
         UserEntity userEntity = findByUsername(username);
 
         userEntity.setFirstName(userProfileEditServiceModel.getFirstName())

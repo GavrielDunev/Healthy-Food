@@ -80,7 +80,6 @@ public class RecipeServiceImpl implements RecipeService {
 
         RecipeEntity recipeEntity = findById(recipeEditServiceModel.getId());
 
-
         recipeEntity.setDescription(recipeEditServiceModel.getDescription())
                 .setDifficulty(recipeEditServiceModel.getDifficulty())
                 .setCookTime(recipeEditServiceModel.getCookTime())

@@ -22,14 +22,6 @@ class DessertControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private DessertService dessertService;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    private MockMultipartFile mockMultipartFile;
-
     @Test
     public void testGetDesserts() throws Exception {
 

@@ -98,7 +98,7 @@ public class RecipeEditViewModel {
         return this;
     }
 
-    public boolean IsMeal() {
+    public boolean getIsMeal() {
         return isMeal;
     }
 
