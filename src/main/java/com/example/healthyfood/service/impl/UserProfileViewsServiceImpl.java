@@ -1,6 +1,8 @@
 package com.example.healthyfood.service.impl;
 
 import com.example.healthyfood.service.UserProfileViewsService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,12 @@ public class UserProfileViewsServiceImpl implements UserProfileViewsService {
 
             String currentUser = requestedUrl.substring(requestedUrl.lastIndexOf("/") + 1);
 
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            if (currentUser.equals(authentication.getName())) {
+                return;
+            }
+
             if (!this.users.containsKey(currentUser)) {
                 this.users.put(currentUser, 1);
             } else {
@@ -37,6 +45,10 @@ public class UserProfileViewsServiceImpl implements UserProfileViewsService {
 
     @Override
     public int getViews(String username) {
+
+        if (!this.users.containsKey(username)) {
+            this.users.put(username, 0);
+        }
 
         return this.users.get(username);
     }

@@ -73,10 +73,6 @@ public class UserServiceImpl implements UserService {
         Set<UserRoleEntity> roles = new HashSet<>();
         roles.add(userRole);
 
-        if (this.userRepository.count() == 1) {
-            roles.add(adminRole);
-        }
-
         newUser.setRoles(roles);
 
         this.userRepository.save(newUser);

@@ -9,12 +9,21 @@ INSERT INTO pictures(id, url, public_id)
 VALUES (1, 'https://res.cloudinary.com/di4ztc4mp/image/upload/v1636195985/profile-pic_u3hhvx.png',
         'profile-pic_u3hhvx');
 
+-- users
 INSERT INTO users (id, username, password, profile_picture_id, email, first_name, last_name)
 VALUES (1, 'user', '33f2dded467875e89ed7011219645022db8bff22a15f0a485fc6e8d4c6dbc2ea6bd150cbd2fb9a7f', 1, 'user@gmail.com', 'User', 'User');
+
+INSERT INTO users (id, username, password, profile_picture_id, email, first_name, last_name)
+VALUES (2, 'admin', '4c5be79bebb3aae34777fc401070460684f12de11520cd3e7d2ba2245c4d0ef3e067ab72a8d5c1b1', 1, 'admin@gmail.com', 'Admin', 'Admin');
 
 -- users roles
 INSERT INTO users_roles (user_entity_id, roles_id)
 VALUES (1, 2);
+
+INSERT INTO users_roles (user_entity_id, roles_id)
+VALUES (2, 1);
+INSERT INTO users_roles (user_entity_id, roles_id)
+VALUES (2, 2);
 
 -- recipes and pictures
 INSERT INTO pictures(id, url, public_id)
