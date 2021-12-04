@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
     public void registerAndLoginUser(UserRegisterServiceModel userRegisterServiceModel) {
 
         UserRoleEntity userRole = this.userRoleRepository.findByRole(UserRoleEnum.USER);
-        UserRoleEntity adminRole = this.userRoleRepository.findByRole(UserRoleEnum.ADMIN);
 
         PictureEntity defaultProfilePicture = this.pictureService.findById(1L);
 
