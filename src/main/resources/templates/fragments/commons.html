@@ -67,39 +67,39 @@
                         </li>
                     </div>
                     <div class="navbar-collapse right">
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" th:href="@{/users/profile/{username}(username = ${#authentication.name})}">My
-                            profile</a>
-                    </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">Admin
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" th:href="@{/admin/add-role}">Add role</a></li>
-                            <li><a class="dropdown-item" th:href="@{/admin/statistics}">Statistics</a></li>
-                        </ul>
-                    </li>
-                    <th:block sec:authorize="!isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/about}">About</a>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link"
+                               th:href="@{/users/profile/{username}(username = ${#authentication.name})}">My
+                                profile</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/users/login}">Login</a>
+                        <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/admin/add-role}">Add role</a></li>
+                                <li><a class="dropdown-item" th:href="@{/admin/statistics}">Statistics</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/users/register}">Register</a>
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/about}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/users/login}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/users/register}">Register</a>
+                            </li>
+                        </th:block>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <form th:action="@{/users/logout}" th:method="post">
+                                <input id="logout-btn" class="btn-link nav-link" type="submit" value="Logout">
+                            </form>
                         </li>
-                    </th:block>
-                    <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <form th:action="@{/users/logout}" th:method="post">
-                            <input id="logout-btn" class="btn-link nav-link" type="submit" value="Logout">
-                        </form>
-                    </li>
                     </div>
                 </ul>
-
             </div>
         </div>
     </nav>
