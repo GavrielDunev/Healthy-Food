@@ -26,7 +26,7 @@
                             <input id="first-name" name="first-name" type="text" class="form-control"
                                    th:field="*{firstName}"
                                    th:errorclass="is-invalid"
-                                   placeholder="Enter first name">
+                                   placeholder="Enter first name" required minlength="2" maxlength="20">
                             <small class="invalid-feedback errors alert alert-danger">
                                 First name length must be between 2 and 20 characters.</small>
                         </div>
@@ -37,7 +37,7 @@
                             <input id="last-name" name="last-name" type="text" class="form-control"
                                    th:field="*{lastName}"
                                    th:errorclass="is-invalid"
-                                   placeholder="Enter last name">
+                                   placeholder="Enter last name" required minlength="3" maxlength="20">
                             <small class="invalid-feedback errors alert alert-danger">
                                 Last name length must be between 3 and 20 characters.</small>
                         </div>

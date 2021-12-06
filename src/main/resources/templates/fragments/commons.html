@@ -20,7 +20,7 @@
 </head>
 
 <header th:fragment="navigation">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="/images/healthy-food.jpg" alt="logo" width="60" height="60">
@@ -34,19 +34,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto col-12 justify-content-between">
                     <div class="navbar-collapse">
-                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                            <a class="nav-link dropdown-toggle" role="button"
-                               data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Add recipe
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/meals/add}">Add meal</a></li>
-                                <li><a class="dropdown-item" th:href="@{/drinks/add}">Add drink</a></li>
-                                <li><a class="dropdown-item" th:href="@{/desserts/add}">Add dessert</a></li>
-                            </ul>
-                        </li>
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button"
                                data-bs-toggle="dropdown"
@@ -64,6 +51,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/desserts}">Desserts</a>
+                        </li>
+                        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                            <a class="nav-link dropdown-toggle" role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Add recipe
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:href="@{/meals/add}">Add meal</a></li>
+                                <li><a class="dropdown-item" th:href="@{/drinks/add}">Add drink</a></li>
+                                <li><a class="dropdown-item" th:href="@{/desserts/add}">Add dessert</a></li>
+                            </ul>
                         </li>
                     </div>
                     <div class="navbar-collapse right">
