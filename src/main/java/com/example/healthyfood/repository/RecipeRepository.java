@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
 
-    @Query(value = "SELECT * FROM healthyfood.recipes r ORDER BY r.created DESC LIMIT 6", nativeQuery = true)
-    List<RecipeEntity> findLastSixRecipesOrderByCreatedDesc();
+    @Query("SELECT r FROM RecipeEntity r ORDER BY r.created DESC")
+    List<RecipeEntity> findRecipesOrderByCreatedDesc();
 }

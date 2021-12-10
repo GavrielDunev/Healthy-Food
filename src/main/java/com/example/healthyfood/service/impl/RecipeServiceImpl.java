@@ -42,8 +42,9 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<RecipeSummaryViewModel> getLastSixRecipeViews() {
 
-        return this.recipeRepository.findLastSixRecipesOrderByCreatedDesc()
+        return this.recipeRepository.findRecipesOrderByCreatedDesc()
                 .stream()
+                .limit(6)
                 .map(recipeEntity -> this.modelMapper.map(recipeEntity, RecipeSummaryViewModel.class))
                 .collect(Collectors.toList());
     }

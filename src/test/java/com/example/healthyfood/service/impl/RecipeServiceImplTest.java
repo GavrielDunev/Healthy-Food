@@ -106,13 +106,13 @@ class RecipeServiceImplTest {
     @Test
     public void testGetLastSixRecipeViews() {
 
-        when(this.recipeRepository.findLastSixRecipesOrderByCreatedDesc())
+        when(this.recipeRepository.findRecipesOrderByCreatedDesc())
                 .thenReturn(List.of(this.recipe1, this.recipe2));
 
         List<RecipeSummaryViewModel> result = this.testService.getLastSixRecipeViews();
 
         assertEquals(result.size(), 2);
-        verify(this.recipeRepository, times(1)).findLastSixRecipesOrderByCreatedDesc();
+        verify(this.recipeRepository, times(1)).findRecipesOrderByCreatedDesc();
     }
 
     @Test

@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/healthyFood?useSSL=false&createDatabaseIfNotExist=true"
     username: root
-    password: databazza
+    password: ${DATABASE_PASSWORD}
   servlet:
     multipart:
       max-file-size: 10MB
