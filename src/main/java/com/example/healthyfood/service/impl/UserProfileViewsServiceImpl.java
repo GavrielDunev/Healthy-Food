@@ -6,13 +6,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 @Service
 public class UserProfileViewsServiceImpl implements UserProfileViewsService {
 
-    private final Map<String, Integer> users = new HashMap<>();
+    private final Map<String, Integer> users = new Hashtable<>();
     private static final String[] PATHS = new String[]{"upload-photo", "recipes", "edit-profile", "change-password"};
 
     @Override
